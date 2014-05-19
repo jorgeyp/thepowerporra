@@ -16,26 +16,26 @@
                     <fieldset>
                     @inputText(
                     signupForm("username"),
-                    '_label -> "Username",
-                    '_help -> "Please choose a valid username.",
+                    '_label -> "Usuario",
+                    '_help -> "Por favor elige un nombre de usuario válido.",
                     '_error -> signupForm.globalError
                     )
 
                     @inputText(
                     signupForm("email"), '_label -> "Email",
-                    '_help -> "Enter a valid email address."
+                    '_help -> "Introduce una dirección de email válida."
                     )
 
                     @inputPassword(
                     signupForm("password.main"),
-                    '_label -> "Password",
-                    '_help -> "A password must be at least 6 characters. "
+                    '_label -> "Contraseña",
+                    '_help -> "La contraseña debe tener al menos 6 caracteres. "
                     )
 
                     @inputPassword(
                     signupForm("password.confirm"),
-                    '_label -> "Repeat password",
-                    '_help -> "Please repeat your password again.",
+                    '_label -> "Repite la contraseña",
+                    '_help -> "Por favor repite la contraseña otra vez.",
                     '_error -> signupForm.error("password")
                     )
                     </fieldset>
@@ -43,27 +43,17 @@
                     <fieldset>
 
                         @checkbox(
-                        signupForm("accept"),
-                        '_label -> None, '_text -> "You agree to the terms and conditions",
+                        signupForm("aceptar"),
+                        '_label -> None, '_text -> "Acepto las condiciones de uso",
                         '_showConstraints -> false
                         )
 
                     </fieldset>
 
                     <div class="actions">
-                        <input type="submit" class="btn primary" value="Sign Up">
-                        <a href="@routes.Porra.index" class="btn">Cancel</a>
+                        <input type="submit" class="btn primary" value="Registrarse">
+                        <a href="@routes.Porra.index" class="btn">Cancelar</a>
                     </div>
-
-
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h2 class="panel-title">¿No tienes cuenta?</h2>
-                </div>
-                <div class="panel-body">
-                    <a href="@routes.SignUp.form()" class="btn btn-primary btn-lg active" role="button">Regístrate</a>
                 </div>
             </div>
         </div>

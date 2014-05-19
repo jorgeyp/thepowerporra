@@ -6,6 +6,7 @@ import play.api.data.Forms._
 
 import models._
 import views._
+import play.api.Routes
 
 /**
  * Created by 71772901 on 15/05/2014.
@@ -25,7 +26,7 @@ object SignUp extends Controller {
         "confirm" -> text
       ).verifying(
           // Add an additional constraint: both passwords must match
-          "Passwords don't match", passwords => passwords._1 == passwords._2
+          "Las contraseñas no coinciden", passwords => passwords._1 == passwords._2
         ),
 
       // Create a mapping that will handle UserProfile values
@@ -38,7 +39,7 @@ object SignUp extends Controller {
         // so we can use default apply/unapply functions here
 //        (UserProfile.apply)(UserProfile.unapply),
 
-      "accept" -> checked("You must accept the conditions")
+      "accept" -> checked("Debes aceptar las condiciones del servicio")
 
     )
       // The mapping signature doesn't match the User case class signature,
@@ -52,7 +53,7 @@ object SignUp extends Controller {
       user => Some(user.email, user.username, (user.sha1Hash, ""), false)
     }.verifying(
         // Add an additional constraint: The username must not be taken (you could do an SQL request here)
-        "This username is not available",
+        "Este usuario ya está cogido",
 //        user => !Seq("admin", "guest").contains(user.username)
           user => !User.findAll.contains(user.username)
       )
@@ -68,5 +69,13 @@ object SignUp extends Controller {
   /**
    * Handle form submission.
    */
-  def submit = TODO
+  def submit = Action { implicit request =>
+    signupForm.bindFromRequest.fold(
+      // Form has errors, redisplay it
+      errors => BadRequest(html.signup.form(errors)),
+
+      // We got a valid User value, display the summary
+      user => Redirect(routes.Porra.index).withSession("email" -> user.email)
+    )
+  }
 }
