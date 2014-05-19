@@ -1,0 +1,67 @@
+@(players: Seq[Player])
+
+@main("Jugadores", nav = "players") {
+<!-- Main jumbotron for a primary marketing message or call to action -->
+
+<div class="container">
+    <div class="jumbotron col-md-6 col-md-offset-3">
+        <h2>Elección de goleador</h2>
+        <div id="success"></div>
+        <div id="error"></div>
+        <img name="" src="@routes.Assets.at("images/players/unknown.jpg")" id="player" class="img-rounded img-responsive">
+        <a id="player-submit" onclick="bet()" href="" class="btn btn-primary btn-lg" role="button">Enviar</a>
+    </div>
+</div> <!-- Container -->
+
+<div class="container">
+    <div class="row">
+        @players.map { player =>
+            <div class="col-xs-3"><a href="#" class="thumbnail"><img src="@routes.Assets.at("images/players/" + player.id + ".jpg")" name="@player.id"></a></div>
+        }
+        <div class="col-xs-3"><a href="#" class="thumbnail"><img src="@routes.Assets.at("images/players/jugador_no_listado.jpg")" class="img-responsive"></a></div>
+    </div>
+</div> <!-- /container -->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<script>
+
+$(document).ready(function() {
+	$("img").click(function () {
+		var src = ($(this).attr('src'));
+		var name = ($(this).attr('name'));
+		$("#player").attr("src",src);
+		$("#player").attr("name",name);
+	});
+});
+
+bootstrap_alert = function() {}
+bootstrap_alert.success = function(message) {
+    $("#success").html('<div id="success" class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+message+'</div>')
+}
+bootstrap_alert.error = function(message) {
+    $("#error").append('<div id="error" class="alert alert-danger alert-dismissable hide"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+message+'</div>')
+}
+
+function bet() {
+    event.preventDefault();
+    var id = $("img").attr("name");
+
+    $.ajax(jsRoutes.controllers.Players.bet(id))
+    .done(function() {
+        bootstrap_alert.success("Apuesta registrada");
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+        bootstrap_alert.error("Ocurrió un error al registrar la apuesta, inténtalo de nuevo");
+        console.log(jqXHR);
+        console.log(textStatus);
+        console.log(errorThrown);
+        alert(errorThrown);
+    });
+}
+
+
+
+</script>
+
+}

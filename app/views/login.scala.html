@@ -1,0 +1,49 @@
+@(form: Form[(String,String)])(implicit flash: Flash)
+
+@main("Iniciar sesión", nav = "login") {
+    @helper.form(routes.Application.authenticate) {
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Inicia sesión</h2>
+                    </div>
+                    <div class="panel-body">
+                        @form.globalError.map { error =>
+                        <div class="alert alert-danger">@error.message</div>
+                        }
+
+                        @flash.get("success").map { message =>
+                        <div class="alert alert-success">@message</div>
+                        }
+
+                        @flash.get("info").map { message =>
+                        <div class="alert alert-info">@message</div>
+                        }
+                        <form role="form">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" class="form-control" id="email" placeholder="Introduce email" value="@form("email").value">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Contraseña</label>
+                                <input type="password" name="password" class="form-control" id="password" placeholder="Contraseña">
+                            </div>
+                            <button type="submit" class="btn btn-default" id="loginbutton">Iniciar sesión</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">¿No tienes cuenta?</h2>
+                    </div>
+                    <div class="panel-body">
+                        <a href="@routes.SignUp.form()" class="btn btn-primary btn-lg active" role="button">Regístrate</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+}

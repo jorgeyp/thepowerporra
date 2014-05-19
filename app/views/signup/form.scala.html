@@ -1,0 +1,73 @@
+@(signupForm: Form[User])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("Registro", nav = "signup") {
+    @helper.form(action = routes.SignUp.submit) {
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Registro</h2>
+                </div>
+                <div class="panel-body">
+                    <fieldset>
+                    @inputText(
+                    signupForm("username"),
+                    '_label -> "Username",
+                    '_help -> "Please choose a valid username.",
+                    '_error -> signupForm.globalError
+                    )
+
+                    @inputText(
+                    signupForm("email"), '_label -> "Email",
+                    '_help -> "Enter a valid email address."
+                    )
+
+                    @inputPassword(
+                    signupForm("password.main"),
+                    '_label -> "Password",
+                    '_help -> "A password must be at least 6 characters. "
+                    )
+
+                    @inputPassword(
+                    signupForm("password.confirm"),
+                    '_label -> "Repeat password",
+                    '_help -> "Please repeat your password again.",
+                    '_error -> signupForm.error("password")
+                    )
+                    </fieldset>
+
+                    <fieldset>
+
+                        @checkbox(
+                        signupForm("accept"),
+                        '_label -> None, '_text -> "You agree to the terms and conditions",
+                        '_showConstraints -> false
+                        )
+
+                    </fieldset>
+
+                    <div class="actions">
+                        <input type="submit" class="btn primary" value="Sign Up">
+                        <a href="@routes.Porra.index" class="btn">Cancel</a>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">¿No tienes cuenta?</h2>
+                </div>
+                <div class="panel-body">
+                    <a href="@routes.SignUp.form()" class="btn btn-primary btn-lg active" role="button">Regístrate</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    }
+}
