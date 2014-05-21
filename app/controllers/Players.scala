@@ -35,7 +35,7 @@ object Players extends Controller with Secured {
 //  }
 
   def bet(id: Int) = IsAuthenticated { email => implicit request =>
-    User.createBet(id, email)
+    User.createPlayerBet(id, email)
     Ok
   }
 }

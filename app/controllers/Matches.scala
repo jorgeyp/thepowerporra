@@ -17,7 +17,10 @@ object Matches extends Controller with Secured {
   /**
    * Display the dashboard.
    */
-  def index = TODO
+  def index = IsAuthenticated {
+    _ => _ =>
+      Ok(html.matches())
+  }
 
 
 }

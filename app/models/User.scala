@@ -86,7 +86,7 @@ object User {
     }
   }
 
-  def createBet(playerId: Int, userEmail: String) = {
+  def createPlayerBet(playerId: Int, userEmail: String) = {
     DB.withConnection { implicit connection =>
 
       SQL(
@@ -108,6 +108,27 @@ object User {
       ).on(
           'idUsuario -> userId,
           'idJugador -> playerId
+        ).executeUpdate()
+    }
+  }
+
+  def createClassificationBet(idRound: Int, idTeam: Int, userEmail: String) = {
+    DB.withConnection { implicit connection =>
+
+      // Get the user id
+      val userId: Int = SQL(
+        """select idUsuario from usuario where email={email}"""
+      ).on(
+          'email -> userEmail
+        ).as(scalar[Int].single)
+
+
+      SQL(
+        """insert into clasificado_apuesta values({idUsuario}, {idRonda}, {idEquipo})"""
+      ).on(
+          'idUsuario -> userId,
+          'idRonda -> idRound,
+          'idEquipo -> idTeam
         ).executeUpdate()
     }
   }
