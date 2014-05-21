@@ -22,5 +22,6 @@ object Classification extends Controller with Secured {
       Ok(html.classification())
   }
 
+  def bet(idRound: Int, idTeam: Int) = TODO
 
 }

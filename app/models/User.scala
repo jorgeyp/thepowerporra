@@ -71,13 +71,13 @@ object User {
     DB.withConnection { implicit connection =>
       SQL(
         """
-          insert into user values (
-            {email}, {descUsuario}, {sha1Hash}
+          insert into usuario (descUsuario, email, sha1Hash) values (
+            {descUsuario}, {email}, {sha1Hash}
           )
         """
       ).on(
-          'email -> user.email,
           'descUsuario -> user.username,
+          'email -> user.email,
           'sha1Hash -> user.sha1Hash
         ).executeUpdate()
 

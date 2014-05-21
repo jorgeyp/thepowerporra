@@ -17,8 +17,8 @@ object SignUp extends Controller {
 
     // Define a mapping that will handle User values
     mapping(
-      "username" -> text(minLength = 4),
       "email" -> email,
+      "username" -> text(minLength = 4),
 
       // Create a tuple mapping for the password/confirm
       "password" -> tuple(
@@ -75,7 +75,10 @@ object SignUp extends Controller {
       errors => BadRequest(html.signup.form(errors)),
 
       // We got a valid User value, display the summary
-      user => Redirect(routes.Porra.index).withSession("email" -> user.email)
+      user => {
+        User.create(user)
+        Redirect(routes.Porra.index).withSession("email" -> user.email)
+      }
     )
   }
 }
