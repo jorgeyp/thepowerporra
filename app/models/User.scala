@@ -95,38 +95,44 @@ object User {
         """
       ).executeUpdate()
 
-      // Get the user id
-      val userId: Int = SQL(
-        """select idUsuario from usuario where email={email}"""
-      ).on(
-        'email -> userEmail
-        ).as(scalar[Int].single)
-
-
       SQL(
         """insert into jugador_apuesta values({idUsuario}, {idJugador})"""
       ).on(
-          'idUsuario -> userId,
+          'idUsuario -> userId(userEmail),
           'idJugador -> playerId
         ).executeUpdate()
     }
   }
 
-  def createClassificationBet(idRound: Int, idTeam: Int, userEmail: String) = {
+  def deleteClassificationBets(userEmail: String) = {
     DB.withConnection { implicit connection =>
+        SQL(
+          """
+            delete from clasificado_apuesta where idUsuario={userId}
+        """
+      ).
+          on(
+         'userId -> userId(userEmail)
+        ).executeUpdate()
+    }
+  }
 
-      // Get the user id
-      val userId: Int = SQL(
+  def userId(userEmail: String): Int = {
+    DB.withConnection { implicit connection =>
+      SQL(
         """select idUsuario from usuario where email={email}"""
       ).on(
           'email -> userEmail
         ).as(scalar[Int].single)
+    }
+  }
 
-
+  def createClassificationBet(idRound: Int, idTeam: Int, userEmail: String) = {
+    DB.withConnection { implicit connection =>
       SQL(
         """insert into clasificado_apuesta values({idUsuario}, {idRonda}, {idEquipo})"""
       ).on(
-          'idUsuario -> userId,
+          'idUsuario -> userId(userEmail),
           'idRonda -> idRound,
           'idEquipo -> idTeam
         ).executeUpdate()
