@@ -3,15 +3,27 @@
 @main("Jugadores", nav = "players") {
 <!-- Main jumbotron for a primary marketing message or call to action -->
 
-<div class="container">
-    <div class="jumbotron col-md-6 col-md-offset-3">
-        <h2>Elección de goleador</h2>
+<div class="jumbotron">
+    <div class="container">
+        <div class="col-xs-12"><center><h1>Elección de goleador</h1></center></div>
         <div id="success"></div>
         <div id="error"></div>
-        <img name="" src="@routes.Assets.at("images/players/unknown.jpg")" id="player" class="img-rounded img-responsive">
-        <a id="player-submit" onclick="bet()" href="" class="btn btn-primary btn-lg" role="button">Enviar</a>
-    </div>
-</div> <!-- Container -->
+	<div class="col-xs-6">
+	    <center>
+	        <img name="" src="@routes.Assets.at("images/players/unknown.jpg")" id="player" class="img-rounded img-responsive">
+	        <br>
+                <a id="player-submit" onclick="bet()" href="" class="btn btn-primary btn-lg" role="button">Enviar</a>
+            </center>
+        </div>
+	<div class="col-xs-6">
+		<p>Puntuación</p>
+		<li>Se escogerá un único jugador de los convocados al mundial</li>
+		<li>Cada gol de dicho jugador te proporcionará <b>10 puntos</b></li>
+		<li>La estadística de goles será la indicada por la <a href="http://es.fifa.com">fifa</a></li>
+		<li>Si el jugador que quieres escoger no aparece en la lista, selecciona la opción de añadir un nuevo jugador</li>
+	</div>
+    </div>  <!-- Container -->
+</div>  <!-- Jumbotron -->
 
 <div class="container">
     <div class="row">
