@@ -147,7 +147,10 @@
 			// Reestablece el color de la imagen (simular un 'enabled' de todas las imágenes)
 			$('img','#mydiv').css({ opacity: 1.0 });
 
-			$('img','#mydiv').parent().parent().children()[1].style.color= "black";
+			// Reestablece el color de la etiqueta (simular un 'enabled' de todas las imágenes)
+			$('img','#mydiv').each(function() {
+				$(this).parent().parent().children()[1].style.color= "black";
+			});
 
 			for (var i=0; i<children.length; i++) {
 				// Si se encuentra un bandera ya cargada...
