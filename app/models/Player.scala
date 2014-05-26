@@ -36,5 +36,34 @@ object Player {
     }
   }
 
+  def playerId(name: String): Int = {
+    DB.withConnection { implicit connection =>
+      SQL(
+        """select idJugador from jugador where descJugador={name} order by idJugador limit 1"""
+      ).on(
+          'name -> name
+        ).as(scalar[Int].single)
+    }
+  }
+  /**
+   * Create a Player.
+   */
+  def create(name: String, team: Int, goals: Int) = {
+    DB.withConnection { implicit connection =>
+      SQL(
+        """
+          insert into jugador (descJugador, idEquipo, golesJugador) values (
+            {name}, {team}, {goals}
+          )
+        """
+      ).on(
+          'name -> name,
+          'team -> team,
+          'goals -> goals
+        ).executeUpdate()
+    }
+  }
+
+
 }
 

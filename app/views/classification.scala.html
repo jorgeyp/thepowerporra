@@ -8,6 +8,8 @@
             <button id="1" type="button" class="btn btn-primary bet" data-toggle="tooltip" data-placement="right" title="Registra tu apuesta de clasificados para esta ronda">Registrar apuesta</button>
         </span>
     </h3>
+    <div id="success-r1"></div>
+    <div id="error-r1"></div>
     <div class="row" id="r1">
         <div class="col-xs-3 thumbnail"><a href="#" data-toggle="modal" data-target="#basicModal"><img id="" src="@routes.Assets.at("images/paises/unknown.png")"></a><h4><p align="center">pendiente</p></h4></div>
         <div class="col-xs-3 thumbnail"><a href="#" data-toggle="modal" data-target="#basicModal"><img id="" src="@routes.Assets.at("images/paises/unknown.png")"></a><h4><p align="center">pendiente</p></h4></div>
@@ -32,6 +34,8 @@
             <button id="2" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Registra tu apuesta de clasificados para esta ronda">Registrar apuesta</button>
         </span>
     </h3>
+    <div id="success-r2"></div>
+    <div id="error-r2"></div>
     <div class="row" id="r2">
         <div class="col-xs-3 thumbnail"><a href="#" data-toggle="modal" data-target="#basicModal"><img id="" src="@routes.Assets.at("images/paises/unknown.png")"></a><h4><p align="center">pendiente</p></h4></div>
         <div class="col-xs-3 thumbnail"><a href="#" data-toggle="modal" data-target="#basicModal"><img id="" src="@routes.Assets.at("images/paises/unknown.png")"></a><h4><p align="center">pendiente</p></h4></div>
@@ -48,6 +52,8 @@
             <button id="3" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Registra tu apuesta de clasificados para esta ronda">Registrar apuesta</button>
         </span>
     </h3></h3>
+    <div id="success-r3"></div>
+    <div id="error-r3"></div>
     <div class="row" id="r3">
         <div class="col-xs-3 thumbnail"><a href="#" data-toggle="modal" data-target="#basicModal"><img id="" src="@routes.Assets.at("images/paises/unknown.png")"></a><h4><p align="center">pendiente</p></h4></div>
         <div class="col-xs-3 thumbnail"><a href="#" data-toggle="modal" data-target="#basicModal"><img id="" src="@routes.Assets.at("images/paises/unknown.png")"></a><h4><p align="center">pendiente</p></h4></div>
@@ -60,6 +66,8 @@
             <button id="4" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Registra tu apuesta de clasificados para esta ronda">Registrar apuesta</button>
         </span>
     </h3></h3>
+    <div id="success-r4"></div>
+    <div id="error-r4"></div>
     <div class="row" id="r4">
         <div class="col-xs-6 thumbnail"><a href="#" data-toggle="modal" data-target="#basicModal"><img id="" src="@routes.Assets.at("images/paises/unknown.png")"></a><h4><p align="center">pendiente</p></h4></div>
         <div class="col-xs-6 thumbnail"><a href="#" data-toggle="modal" data-target="#basicModal"><img id="" src="@routes.Assets.at("images/paises/unknown.png")"></a><h4><p align="center">pendiente</p></h4></div>
@@ -70,6 +78,8 @@
             <button id="5" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Registra tu apuesta de clasificados para esta ronda">Registrar apuesta</button>
         </span>
     </h3></h3>
+    <div id="success-r5"></div>
+    <div id="error-r5"></div>
     <div class="row" id="r5">
         <div class="col-xs-12 thumbnail"><a href="#" data-toggle="modal" data-target="#basicModal"><img id="" src="@routes.Assets.at("images/paises/unknown.png")"></a><h4><p align="center">pendiente</p></h4></div>
     </div>
@@ -197,6 +207,14 @@
         });
 	});
 
+	bootstrap_alert = function() {}
+    bootstrap_alert.success = function(message, round) {
+        $("#success-r" + round).html('<div id="success" class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+message+'</div>')
+    }
+    bootstrap_alert.error = function(message, round) {
+        $("#error-r" +round).append('<div id="error" class="alert alert-danger alert-dismissable hide"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+message+'</div>')
+    }
+
     function bet(round) {
         event.preventDefault();
 
@@ -204,15 +222,14 @@
             var team = $(this).attr("id");
              $.ajax(jsRoutes.controllers.Classification.bet(round,team))
             .done(function() {
-                //bootstrap_alert.success("Apuesta registrada");
-
+                bootstrap_alert.success("Apuesta registrada", round);
             })
             .fail(function(jqXHR, textStatus, errorThrown) {
-                //bootstrap_alert.error("Ocurrió un error al registrar la apuesta, inténtalo de nuevo");
+                bootstrap_alert.error("Ocurrió un error al registrar la apuesta, inténtalo de nuevo", round);
                 console.log(jqXHR);
                 console.log(textStatus);
                 console.log(errorThrown);
-                alert(errorThrown);
+                //alert(errorThrown);
             });
         });
     }

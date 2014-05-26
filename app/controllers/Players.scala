@@ -15,6 +15,21 @@ import views._
  */
 object Players extends Controller with Secured {
 
+//  val playerForm = Form(
+//    mapping(
+//      "name" -> text,
+//      "team" -> text
+//    )
+//    {(name, team, _) => Player(name, Team.findIdByName(name))}
+//  )
+
+//  def index = IsAuthenticated { username => _ =>
+//    User.findByEmail(username).map { user =>
+//      Ok(
+//        html.perfil(user)
+//      )
+//    }.getOrElse(Forbidden)
+//  }
 
   /**
    * Display the dashboard.
@@ -36,6 +51,12 @@ object Players extends Controller with Secured {
 
   def bet(id: Int) = IsAuthenticated { email => implicit request =>
     User.createPlayerBet(id, email)
+    Ok
+  }
+
+  def submit(name: String, team: Int) = IsAuthenticated {email => implicit request =>
+    Player.create(name, team, 0)
+    User.createPlayerBet(Player.playerId(name), email)
     Ok
   }
 }
