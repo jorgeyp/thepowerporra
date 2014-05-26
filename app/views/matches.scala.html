@@ -31,9 +31,6 @@
     <br>
     <form role="form">
         <div class="row">
-            <span>
-                <button id="1" type="button" class="btn btn-primary bet" data-toggle="tooltip" data-placement="right" title="">Registrar apuesta</button>
-            </span>
             <div class="col-xs-1"></div>
             <div class="col-xs-2 thumbnail vcenter">
                 <img src="@routes.Assets.at("images/paises/7.png")" class="img-responsive">
@@ -47,6 +44,33 @@
             </div>
             <div class="col-xs-1"></div>
         </div>
+
+        <div class="row">
+            <div class="col-md-3 col-md-offset-2">
+                <div class="well">
+                    <img src="@routes.Assets.at("images/paises/7.png")" class="img-responsive img-rounded">
+                    <h1><p>Brasil</p></h1>
+                </div>
+            </div>
+            <div class="col-md-2 well">
+                <div class="row">
+                    <div class="col-md-6"><p align="center"><input type="number" value=0 min=0 step=1 max=20 data-bind="value:replyNumber" id="goles1" maxlength="2" size="2"></p></div>
+                    <div class="col-md-6"><p align="center"><input type="number" value=0 min=0 step=1 max=20 data-bind="value:replyNumber" id="goles2" maxlength="2" size="2"></p></div>
+                </div>
+                <div class="container"><button id="1" type="button" class="btn btn-primary bet" data-toggle="tooltip" data-placement="right" title="">Registrar apuesta</button></div>
+            </div>
+            <div class="col-md-3">
+                <div class="well">
+                    <img src="@routes.Assets.at("images/paises/17.png")" class="img-responsive img-rounded">
+                    <h1><p>USA</p></h1>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
 
         <div class="row">
             <div class="col-xs-1"></div>
