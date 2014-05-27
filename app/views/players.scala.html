@@ -28,9 +28,9 @@
 <div class="container">
     <div class="row">
         @players.map { player =>
-            <div class="col-xs-3"><a href="#" class="thumbnail"><img src="@routes.Assets.at("images/players/" + player.id + ".jpg")" name="@player.id"></a></div>
+            <div class="col-xs-3"><a href="#" class="thumbnail"><img src='@routes.Assets.at("images/players/" + player.id + ".jpg")' name="@player.id"></a></div>
         }
-        <div class="col-xs-3"><a href="#" class="thumbnail"><img src="@routes.Assets.at("images/players/jugador_no_listado.jpg")" name="unknown" class="img-responsive"></a></div>
+        <div class="col-xs-3"><a href="#" class="thumbnail"><img src='@routes.Assets.at("images/players/jugador_no_listado.jpg")' name="unknown" class="img-responsive"></a></div>
     </div>
 </div> <!-- /container -->
 
@@ -46,7 +46,6 @@
 
                 <label for="newPlayerName">Nombre del jugador:</label>
                 <input type="text" name="name" class="form-control" id="newPlayerName" placeholder="Introduzca nombre del jugador">
-
 
                 <label for="newPlayerTeam">Equipo del jugador:</label>
                 <div class="row">

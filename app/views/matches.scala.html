@@ -1,130 +1,78 @@
+@(matches: Seq[Match])
+
+
 @main("Partidos", nav = "matches") {
 
 <div class="jumbotron">
     <div class="container">
-	<div class="col-xs-12"><center><h1>Partidos de la 1ª Fase</h1></center></div>
-	<div class="col-xs-4">
-		<center>
-			<img src='img/pdteimagen.jpg' class="img-rounded img-responsive">
-		</center>
-	</div>
-	<div class="col-xs-8">
-		<p>Puntuación</p>
-		<li>Se indicará el resultado de cada uno de los partidos de la 1ª fase</li>
-		<li>Acertar el signo supone <b>1 punto</b></li>
-		<li>Acertar la diferencia de goles supone <b>2 puntos</b></li>
-		<li>También se puntuará según la cercanía al resultado y la dificultad del mismo</li>
-		<li>Puntos.Dificultad= MAX(3,SQRT(Goles.Equipo1^2+Goles.Equipo2^2))</li>
-		<li>Cercanía= |Goles.Equipo1-Apuesta.Equipo1|+|Goles.Equipo2-Apuesta.Equipo2|
-			<ul>
-				<li>Cercanía == 0: 100% Puntos.Dificultad</li>
-				<li>Cercanía == 1: 25% Puntos.Dificultad</li>
-				<li>Cercanía == 2: 10% Puntos.Dificultad</li>
-			</ul>
-		</li>
-		<p>TODO: Ejemplos</p>
-	</div>
+        <div class="col-xs-12"><center><h1>Partidos de la 1ª Fase</h1></center></div>
+        <div class="col-xs-4">
+            <center>
+                <img src='img/pdteimagen.jpg' class="img-rounded img-responsive">
+            </center>
+        </div>
+        <div class="col-xs-8">
+            <p>Puntuación</p>
+            <li>Se indicará el resultado de cada uno de los partidos de la 1ª fase</li>
+            <li>Acertar el signo supone <b>1 punto</b></li>
+            <li>Acertar la diferencia de goles supone <b>2 puntos</b></li>
+            <li>También se puntuará según la cercanía al resultado y la dificultad del mismo</li>
+            <li>Puntos.Dificultad= MAX(3,SQRT(Goles.Equipo1^2+Goles.Equipo2^2))</li>
+            <li>Cercanía= |Goles.Equipo1-Apuesta.Equipo1|+|Goles.Equipo2-Apuesta.Equipo2|
+                <ul>
+                    <li>Cercanía == 0: 100% Puntos.Dificultad</li>
+                    <li>Cercanía == 1: 25% Puntos.Dificultad</li>
+                    <li>Cercanía == 2: 10% Puntos.Dificultad</li>
+                </ul>
+            </li>
+            <p>TODO: Ejemplos</p>
+        </div>
     </div>
 </div>
 
-<div class="container">
-    <br>
-    <form role="form">
-        <div class="row">
-            <div class="col-xs-1"></div>
-            <div class="col-xs-2 thumbnail vcenter">
-                <img src="@routes.Assets.at("images/paises/7.png")" class="img-responsive">
-                <h1><p align="center">Brasil</p></h1>
-            </div>
-            <div class="col-xs-2 thumbnail vcenter"><p align="center"><input type="number" value=0 min=0 step=1 max=20 data-bind="value:replyNumber" id="goles1" maxlength="2" size="2"></p></div>
-            <div class="col-xs-2 thumbnail vcenter"><p align="center"><input type="number" value=0 min=0 step=1 max=20 data-bind="value:replyNumber" id="goles2" maxlength="2" size="2"></p></div>
-            <div class="col-xs-2 thumbnail vcenter">
-                <img src="@routes.Assets.at("images/paises/17.png")" class="img-responsive">
-                <h1><p align="center">USA</p></h1>
-            </div>
-            <div class="col-xs-1"></div>
-        </div>
+@matches.map {m =>
 
-        <div class="row">
-            <div class="col-md-3 col-md-offset-2">
-                <div class="well">
-                    <img src="@routes.Assets.at("images/paises/7.png")" class="img-responsive img-rounded">
-                    <h1><p>Brasil</p></h1>
-                </div>
-            </div>
-            <div class="col-md-2 well">
-                <div class="row">
-                    <div class="col-md-6"><p align="center"><input type="number" value=0 min=0 step=1 max=20 data-bind="value:replyNumber" id="goles1" maxlength="2" size="2"></p></div>
-                    <div class="col-md-6"><p align="center"><input type="number" value=0 min=0 step=1 max=20 data-bind="value:replyNumber" id="goles2" maxlength="2" size="2"></p></div>
-                </div>
-                <div class="container"><button id="1" type="button" class="btn btn-primary bet" data-toggle="tooltip" data-placement="right" title="">Registrar apuesta</button></div>
-            </div>
-            <div class="col-md-3">
-                <div class="well">
-                    <img src="@routes.Assets.at("images/paises/17.png")" class="img-responsive img-rounded">
-                    <h1><p>USA</p></h1>
-                </div>
-            </div>
-
-
-
-        </div>
-
-
-
-        <div class="row">
-            <div class="col-xs-1"></div>
-            <div class="col-xs-2 thumbnail vcenter">
-                <img src="@routes.Assets.at("images/paises/1.png")" class="img-responsive">
-                <h1><p align="center">Alemania</p></h1>
-            </div>
-            <div class="col-xs-2 thumbnail vcenter"><p align="center"><input type="number" value=0 min=0 step=1 max=20 data-bind="value:replyNumber" id="goles1" maxlength=2 size=2></p></div>
-            <div class="col-xs-2 thumbnail vcenter"><p align="center"><input type="number" value=0 min=0 step=1 max=20 data-bind="value:replyNumber" id="goles2" maxlength=2 size=2></p></div>
-            <div class="col-xs-2 thumbnail vcenter">
-                <img src="@routes.Assets.at("images/paises/24.png")" class="img-responsive">
-                <h1><p align="center">Italia</p></h1>
-            </div>
-            <div class="col-xs-1"></div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-1"></div>
-            <div class="col-xs-2 thumbnail vcenter">
-                <img src="@routes.Assets.at("images/paises/8.png")" class="img-responsive">
-                <h1><p align="center">Ghana</p></h1>
-            </div>
-            <div class="col-xs-2 thumbnail vcenter"><p align="center"><input type="number" value=0 min=0 step=1 max=20 data-bind="value:replyNumber" id="goles1" maxlength="2" size="2"></p></div>
-            <div class="col-xs-2 thumbnail vcenter"><p align="center"><input type="number" value=0 min=0 step=1 max=20 data-bind="value:replyNumber" id="goles2" maxlength="2" size="2"></p></div>
-            <div class="col-xs-2 thumbnail vcenter">
-                <img src="@routes.Assets.at("images/paises/26.png")" class="img-responsive">
-                <h1><p align="center">Rumania</p></h1>
-            </div>
-            <div class="col-xs-1"></div>
-        </div>
-
-    </form>
+<div class="col-md-3 col-md-offset-2">
+    <div class="well">
+        <img src='@routes.Assets.at("images/paises/" + m.idTeam1 + ".png")' class="img-responsive img-rounded center-block">
+        <h1 class="text-center"><p>@Team.findById(m.idTeam1).get.name</p></h1>
+    </div>
 </div>
+<div class="col-md-2 well">
+    <div class="row">
+        <div class="col-md-6"><p><input type="number" value=0 min=0 step=1 max=20 data-bind="value:replyNumber" id="goles1" maxlength="2" size="2"></p></div>
+        <div class="col-md-6"><p><input type="number" value=0 min=0 step=1 max=20 data-bind="value:replyNumber" id="goles2" maxlength="2" size="2"></p></div>
+    </div>
+    <div class="container"><button id="1" type="button" class="btn btn-primary bet" data-toggle="tooltip" data-placement="right" title="">Registrar apuesta</button></div>
+</div>
+<div class="col-md-3">
+    <div class="well">
+        <img src='@routes.Assets.at("images/paises/" + m.idTeam2 + ".png")' class="img-responsive img-rounded center-block">
+        <h1 class="text-center"><p>@Team.findById(m.idTeam2).get.name</p></h1>
+    </div>
+</div>
+
+}
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script>
-		$(document).ready(function() {
-			$('input') .keypress(function(e) {
-                 var key_codes = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 0, 8];
+    $(document).ready(function() {
+        $('input').keypress(function(e) {
+             var key_codes = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 0, 8];
 
-                 if (!($.inArray(e.which, key_codes) >= 0)) {
-                   e.preventDefault();
-                 }
-			});
+             if (!($.inArray(e.which, key_codes) >= 0)) {
+               e.preventDefault();
+             }
+        });
 
-			$("input").blur(function(){
-				if($(this).val() > parseInt($(this).attr('max'))){
-					$(this).select();
-				}
-				else {
-					$(this).val(parseInt($(this).val()));
-				}
-			});
-
-		});
-	</script>
+        $("input").blur(function(){
+            if($(this).val() > parseInt($(this).attr('max'))){
+                $(this).select();
+            }
+            else {
+                $(this).val(parseInt($(this).val()));
+            }
+        });
+    });
+</script>
 }

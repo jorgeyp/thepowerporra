@@ -21,6 +21,17 @@ object Team {
   }
 
   /**
+   * Retrieve a Team from id.
+   */
+  def findById(id: Int): Option[Team] = {
+    DB.withConnection { implicit connection =>
+      SQL("select * from equipo where idEquipo = {idEquipo}").on(
+        'idEquipo -> id
+      ).as(Team.simple.singleOpt)
+    }
+  }
+
+  /**
    * Retrieve a Team from name.
    */
   def findByName(name: String): Option[Team] = {

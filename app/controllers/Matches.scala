@@ -19,7 +19,7 @@ object Matches extends Controller with Secured {
    */
   def index = IsAuthenticated {
     _ => _ =>
-      Ok(html.matches())
+      Ok(html.matches(Match.findAll))
   }
 
 
