@@ -35,20 +35,22 @@
 <div class="col-md-3 col-md-offset-2">
     <div class="well">
         <img src='@routes.Assets.at("images/paises/" + m.idTeam1 + ".png")' class="img-responsive img-rounded center-block">
-        <h1 class="text-center"><p>@Team.findById(m.idTeam1).get.name</p></h1>
+        <h2 class="text-center"><p>@Team.findById(m.idTeam1).get.name</p></h2>
     </div>
 </div>
 <div class="col-md-2 well">
     <div class="row">
-        <div class="col-md-6"><p><input type="number" value=0 min=0 step=1 max=20 data-bind="value:replyNumber" id="goles1" maxlength="2" size="2"></p></div>
-        <div class="col-md-6"><p><input type="number" value=0 min=0 step=1 max=20 data-bind="value:replyNumber" id="goles2" maxlength="2" size="2"></p></div>
+        <div class="col-md-6"><p><input type="number" value=0 min=0 step=1 max=20 data-bind="value:replyNumber" id="g1@m.idTeam1" maxlength="2" size="2"></p></div>
+        <div class="col-md-6"><p><input type="number" value=0 min=0 step=1 max=20 data-bind="value:replyNumber" id="g2@m.idTeam2" maxlength="2" size="2"></p></div>
+        <div id="success@m.idTeam1@m.idTeam2"></div>
+        <div id="error@m.idTeam1@m.idTeam2"></div>
     </div>
-    <div class="container"><button id="1" type="button" class="btn btn-primary bet" data-toggle="tooltip" data-placement="right" title="">Registrar apuesta</button></div>
+    <div class="container"><button id="1" onclick="event.preventDefault(); bet(@m.idTeam1, @m.idTeam2);" type="button" class="btn btn-primary bet" data-toggle="tooltip" data-placement="right" title="">Registrar apuesta</button></div>
 </div>
 <div class="col-md-3">
     <div class="well">
         <img src='@routes.Assets.at("images/paises/" + m.idTeam2 + ".png")' class="img-responsive img-rounded center-block">
-        <h1 class="text-center"><p>@Team.findById(m.idTeam2).get.name</p></h1>
+        <h2 class="text-center"><p>@Team.findById(m.idTeam2).get.name</p></h2>
     </div>
 </div>
 
@@ -74,5 +76,32 @@
             }
         });
     });
+
+    bootstrap_alert = function() {}
+    bootstrap_alert.success = function(message, id1, id2) {
+        $("#success" + id1 + "" + id2).html('<div id="success" class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+message+'</div>')
+    }
+    bootstrap_alert.error = function(message, id1, id2) {
+        $("#error" + id1 + "" + id2).html('<div id="error" class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+message+'</div>')
+    }
+
+function bet(idTeam1, idTeam2) {
+    event.preventDefault();
+
+    var g1 = $("#g1" + idTeam1).attr("value");
+    var g2 = $("#g2" + idTeam2).attr("value");
+    $.ajax(jsRoutes.controllers.Matches.bet(idTeam1, idTeam2, g1, g2))
+    .done(function() {
+        bootstrap_alert.success("Apuesta registrada", idTeam1, idTeam2);
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+        bootstrap_alert.error("Error", idTeam1, idTeam2);
+        console.log(jqXHR);
+        console.log(textStatus);
+        console.log(errorThrown);
+    });
+
+}
+
 </script>
 }
