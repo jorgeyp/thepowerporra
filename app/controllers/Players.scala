@@ -59,4 +59,8 @@ object Players extends Controller with Secured {
     User.createPlayerBet(Player.playerId(name), email)
     Ok
   }
+
+  def set = IsAdmin { email => implicit request =>
+    Ok(html.administration.playersControl(Player.findAll))
+  }
 }
