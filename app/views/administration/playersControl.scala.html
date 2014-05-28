@@ -1,0 +1,154 @@
+@(players: Seq[Player])
+
+@main("Jugadores", nav = "players") {
+<!-- Main jumbotron for a primary marketing message or call to action -->
+
+<div class="jumbotron">
+    <div class="container">
+        <div class="col-xs-12"><center><h1>Panel de control de jugadores</h1></center></div>
+    </div>  <!-- Container -->
+</div>  <!-- Jumbotron -->
+
+<div class="container">
+    <div class="row">
+        @players.map { player =>
+            <div class="col-xs-3"><a href="#" class="thumbnail"><img src='@routes.Assets.at("images/players/" + player.id + ".jpg")' name="@player.id"></a></div>
+        }
+        <div class="col-xs-3"><a href="#" class="thumbnail"><img src='@routes.Assets.at("images/players/jugador_no_listado.jpg")' name="unknown" class="img-responsive"></a></div>
+    </div>
+</div> <!-- /container -->
+
+
+<div class="modal fade" id="newPlayerModal" tabindex="-1" role="dialog" aria-labelledby="newPlayerModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="newPlayerModal">Añadir nuevo jugador</h4>
+            </div>
+            <div class="modal-body">
+
+                <label for="newPlayerName">Nombre del jugador:</label>
+                <input type="text" name="name" class="form-control" id="newPlayerName" placeholder="Introduzca nombre del jugador">
+
+                <label for="newPlayerTeam">Equipo del jugador:</label>
+                <div class="row">
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=1 src="@routes.Assets.at("images/paises/1.png")"></a><h5><p align="center">Alemania</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=2 src="@routes.Assets.at("images/paises/2.png")"></a><h5><p align="center">Argelia</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=3 src="@routes.Assets.at("images/paises/3.png")"></a><h5><p align="center">Argentina</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=4 src="@routes.Assets.at("images/paises/4.png")"></a><h5><p align="center">Australia</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=5 src="@routes.Assets.at("images/paises/5.png")"></a><h5><p align="center">Bélgica</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=6 src="@routes.Assets.at("images/paises/6.png")"></a><h5><p align="center">Bosnia</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=7 src="@routes.Assets.at("images/paises/7.png")"></a><h5><p align="center">Brasil</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=8 src="@routes.Assets.at("images/paises/8.png")"></a><h5><p align="center">Camerún</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=9 src="@routes.Assets.at("images/paises/9.png")"></a><h5><p align="center">Chile</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=10 src="@routes.Assets.at("images/paises/10.png")"></a><h5><p align="center">Colombia</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=11 src="@routes.Assets.at("images/paises/11.png")"></a><h5><p align="center">Corea.Sur</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=12 src="@routes.Assets.at("images/paises/12.png")"></a><h5><p align="center">Costa.Marfil</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=13 src="@routes.Assets.at("images/paises/13.png")"></a><h5><p align="center">Costa.Rica</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=14 src="@routes.Assets.at("images/paises/14.png")"></a><h5><p align="center">Croacia</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=15 src="@routes.Assets.at("images/paises/15.png")"></a><h5><p align="center">Ecuador</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=16 src="@routes.Assets.at("images/paises/16.png")"></a><h5><p align="center">España</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=17 src="@routes.Assets.at("images/paises/17.png")"></a><h5><p align="center">EE.UU.</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=18 src="@routes.Assets.at("images/paises/18.png")"></a><h5><p align="center">Francia</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=19 src="@routes.Assets.at("images/paises/19.png")"></a><h5><p align="center">Ghana</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=20 src="@routes.Assets.at("images/paises/20.png")"></a><h5><p align="center">Grecia</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=21 src="@routes.Assets.at("images/paises/21.png")"></a><h5><p align="center">Honduras</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=22 src="@routes.Assets.at("images/paises/22.png")"></a><h5><p align="center">Inglaterra</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=23 src="@routes.Assets.at("images/paises/23.png")"></a><h5><p align="center">Irán</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=24 src="@routes.Assets.at("images/paises/24.png")"></a><h5><p align="center">Italia</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=25 src="@routes.Assets.at("images/paises/25.png")"></a><h5><p align="center">Japón</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=26 src="@routes.Assets.at("images/paises/26.png")"></a><h5><p align="center">México</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=27 src="@routes.Assets.at("images/paises/27.png")"></a><h5><p align="center">Nigeria</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=28 src="@routes.Assets.at("images/paises/28.png")"></a><h5><p align="center">Holanda</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=29 src="@routes.Assets.at("images/paises/29.png")"></a><h5><p align="center">Portugal</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=30 src="@routes.Assets.at("images/paises/30.png")"></a><h5><p align="center">Rusia</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=31 src="@routes.Assets.at("images/paises/31.png")"></a><h5><p align="center">Suiza</p></h5></div>
+                    <div class="col-xs-3 col-sm-2 thumbnail teamFlag"><a href="#"><img id=32 src="@routes.Assets.at("images/paises/32.png")"></a><h5><p align="center">Uruguay</p></h5></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="newPlayerButton" >Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<script>
+
+$(document).ready(function() {
+	$("img").click(function () {
+		var src = ($(this).attr('src'));
+		var name = ($(this).attr('name'));
+		$("#player").attr("src",src);
+		$("#player").attr("name",name);
+	});
+
+	$(".teamFlag").on("click", function() {
+	    $(this).attr("selected", true);
+	});
+
+	$("#newPlayerButton").on("click", function() {
+	    var team = $('div[selected="selected"]').find("img").attr("id");
+	    var player = $("#newPlayerName").val();
+        if(undefined != team && player != "") {
+	        submit(player, team);
+	        $("#newPlayerModal").modal("hide");
+	    }
+	});
+});
+
+bootstrap_alert = function() {}
+bootstrap_alert.success = function(message) {
+    $("#success").html('<div id="success" class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+message+'</div>')
+}
+bootstrap_alert.error = function(message) {
+    $("#error").append('<div id="error" class="alert alert-danger alert-dismissable hide"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+message+'</div>')
+}
+
+function submit(player, team) {
+    $.ajax(jsRoutes.controllers.Players.submit(player, team))
+    .done(function() {
+        bootstrap_alert.success("Apuesta registrada");
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+        bootstrap_alert.error("Ocurrió un error al registrar la apuesta, inténtalo de nuevo");
+        console.log(jqXHR);
+        console.log(textStatus);
+        console.log(errorThrown);
+        alert(errorThrown);
+    });
+}
+
+function bet() {
+    event.preventDefault();
+    var id = $("img").attr("name");
+    if (id === "unknown") {
+        $('#newPlayerModal').modal('show');
+        $('#newPlayerModal').on('shown.bs.modal', function (e) {})
+    } else {
+        $.ajax(jsRoutes.controllers.Players.bet(id))
+        .done(function() {
+            bootstrap_alert.success("Apuesta registrada");
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+            bootstrap_alert.error("Ocurrió un error al registrar la apuesta, inténtalo de nuevo");
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+            alert(errorThrown);
+        });
+    }
+}
+
+
+
+
+
+</script>
+
+}

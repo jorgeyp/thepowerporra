@@ -21,6 +21,7 @@ POST    /signup                             controllers.SignUp.submit
 GET     /players                            controllers.Players.index
 POST    /players/:id                        controllers.Players.bet(id: Int)
 POST    /players/:namePlayer/:idTeam        controllers.Players.submit(namePlayer: String, idTeam: Int)
+GET    /players/set                        controllers.Players.set
 
 # Matches
 GET     /matches                            controllers.Matches.index
