@@ -26,4 +26,12 @@ object Matches extends Controller with Secured {
     User.createMatchBet(idTeam1, idTeam2, g1, g2, email)
     Ok
   }
+  /**
+   * Display the dashboard.
+   */
+  def set = IsAdmin { email => implicit request =>
+      Ok(html.administration.matchesControl(Match.findAll))
+  }
+
+
 }

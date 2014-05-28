@@ -85,6 +85,18 @@ trait Secured {
   def IsAuthenticated(f: => String => Request[AnyContent] => Result) = Security.Authenticated(email, onUnauthorized) { user =>
     Action(request => f(user)(request))
   }
+
+  /**
+   * Check if the connected user is admin.
+   */
+  def IsAdmin(f: => String => Request[AnyContent] => Result) = IsAuthenticated { email => request =>
+    if(User.isAdmin(User.userId(email))) {
+      f(email)(request)
+    } else {
+      Results.Forbidden(views.html.administration.unauthorized())
+    }
+  }
+
 }
 
 

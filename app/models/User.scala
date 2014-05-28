@@ -64,6 +64,27 @@ object User {
     }
   }
 
+  def isAdmin(user: Int): Boolean = {
+    DB.withConnection { implicit connection =>
+      val idPerm = SQL(
+        """select idPermiso from permiso_usuario where idUsuario={user}"""
+      ).on(
+          'user -> user
+        ).as(scalar[Int].singleOpt)
+
+      val perm = SQL(
+        """select descPermiso from permiso where idPermiso={idPerm}"""
+      ).on(
+          'idPerm -> idPerm
+        ).as(str("descPermiso").singleOpt)
+
+      if(perm.getOrElse("null") == "Actualizacion")
+        true
+      else
+        false
+    }
+  }
+
   /**
    * Create a User.
    */
@@ -104,6 +125,34 @@ object User {
     }
   }
 
+  def createMatchBet(idTeam1: Int, idTeam2: Int, goalsTeam1: Int, goalsTeam2: Int, userEmail: String) = {
+    DB.withConnection { implicit connection =>
+
+      SQL(
+        """
+          delete from partido_apuesta where idUsuario={idUsuario} and idEquipo1={idEquipo1} and idEquipo2={idEquipo2}
+        """
+      ).on(
+          'idUsuario -> userId(userEmail),
+          'idEquipo1 -> idTeam1,
+          'idEquipo2 -> idTeam2
+        ).executeUpdate()
+
+      SQL(
+        """
+          |insert into partido_apuesta
+          |values({idUsuario}, {idEquipo1}, {idEquipo2},  {golesEquipo1}, {golesEquipo2})
+        """.stripMargin
+      ).on(
+          'idUsuario -> userId(userEmail),
+          'idEquipo1 -> idTeam1,
+          'idEquipo2 -> idTeam2,
+          'golesEquipo1 -> goalsTeam1,
+          'golesEquipo2 -> goalsTeam2
+        ).executeUpdate()
+    }
+  }
+
   def deleteClassificationBets(userEmail: String) = {
     DB.withConnection { implicit connection =>
         SQL(
@@ -135,34 +184,6 @@ object User {
           'idUsuario -> userId(userEmail),
           'idRonda -> idRound,
           'idEquipo -> idTeam
-        ).executeUpdate()
-    }
-  }
-
-  def createMatchBet(idTeam1: Int, idTeam2: Int, goalsTeam1: Int, goalsTeam2: Int, userEmail: String) = {
-    DB.withConnection { implicit connection =>
-
-      SQL(
-        """
-          delete from partido_apuesta where idUsuario={idUsuario} and idEquipo1={idEquipo1} and idEquipo2={idEquipo2}
-        """
-      ).on(
-          'idUsuario -> userId(userEmail),
-          'idEquipo1 -> idTeam1,
-          'idEquipo2 -> idTeam2
-        ).executeUpdate()
-
-      SQL(
-        """
-          |insert into partido_apuesta
-          |values({idUsuario}, {idEquipo1}, {idEquipo2},  {golesEquipo1}, {golesEquipo2})
-        """.stripMargin
-      ).on(
-          'idUsuario -> userId(userEmail),
-          'idEquipo1 -> idTeam1,
-          'idEquipo2 -> idTeam2,
-          'golesEquipo1 -> goalsTeam1,
-          'golesEquipo2 -> goalsTeam2
         ).executeUpdate()
     }
   }
