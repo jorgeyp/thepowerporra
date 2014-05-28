@@ -12,6 +12,7 @@ import anorm.SqlParser._
 case class User(email: String, username: String, sha1Hash: String)
 
 object User {
+
   // -- Parsers
 
   /**
@@ -61,6 +62,27 @@ object User {
           'email -> email,
           'sha1Hash -> sha1Hash
         ).as(User.simple.singleOpt)
+    }
+  }
+
+  def isAdmin(user: Int): Boolean = {
+    DB.withConnection { implicit connection =>
+      val idPerm = SQL(
+        """select idPermiso from permiso_usuario where idUsuario={user}"""
+      ).on(
+          'user -> user
+        ).as(scalar[Int].singleOpt)
+
+      val perm = SQL(
+        """select descPermiso from permiso where idPermiso={idPerm}"""
+      ).on(
+          'idPerm -> idPerm
+        ).as(str("descPermiso").singleOpt)
+
+      if(perm.getOrElse("null") == "Actualizacion")
+        true
+      else
+        false
     }
   }
 
