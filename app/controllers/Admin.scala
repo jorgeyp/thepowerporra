@@ -18,7 +18,7 @@ object Admin extends Controller with Secured {
    * Display the dashboard.
    */
   def index = IsAdmin { email => implicit request =>
-    Ok(html.admin())
+    Ok(html.administration.admin())
   }
 
 }
