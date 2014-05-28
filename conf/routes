@@ -10,6 +10,9 @@ GET     /login                              controllers.Application.login
 POST    /login                              controllers.Application.authenticate
 GET     /logout                             controllers.Application.logout
 
+# Admin
+GET     /admin                              controllers.Admin.index
+
 # Signup
 GET     /signup                             controllers.SignUp.form
 POST    /signup                             controllers.SignUp.submit
@@ -21,6 +24,7 @@ POST    /players/:namePlayer/:idTeam        controllers.Players.submit(namePlaye
 
 # Matches
 GET     /matches                            controllers.Matches.index
+GET     /matches/set                        controllers.Matches.set
 
 # Classification
 GET     /classification                     controllers.Classification.index

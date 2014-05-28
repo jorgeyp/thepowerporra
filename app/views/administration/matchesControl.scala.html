@@ -1,0 +1,55 @@
+@(matches: Seq[Match])
+
+
+@main("Partidos", nav = "matches") {
+
+    <div class="container">
+        <div class="col-md-6 col-md-offset-3"><center><h1>Panel de control de partidos</h1></center></div>
+    </div>
+
+@matches.map {m =>
+
+<div class="col-md-3 col-md-offset-2">
+    <div class="well">
+        <img src='@routes.Assets.at("images/paises/" + m.idTeam1 + ".png")' class="img-responsive img-rounded center-block">
+        <h1 class="text-center"><p>@Team.findById(m.idTeam1).get.name</p></h1>
+    </div>
+</div>
+<div class="col-md-2 well">
+    <div class="row">
+        <div class="col-md-6"><p><input type="number" value=0 min=0 step=1 max=20 data-bind="value:replyNumber" id="goles1" maxlength="2" size="2"></p></div>
+        <div class="col-md-6"><p><input type="number" value=0 min=0 step=1 max=20 data-bind="value:replyNumber" id="goles2" maxlength="2" size="2"></p></div>
+    </div>
+    <div class="container"><button id="1" type="button" class="btn btn-primary bet" data-toggle="tooltip" data-placement="right" title="">Registrar apuesta</button></div>
+</div>
+<div class="col-md-3">
+    <div class="well">
+        <img src='@routes.Assets.at("images/paises/" + m.idTeam2 + ".png")' class="img-responsive img-rounded center-block">
+        <h1 class="text-center"><p>@Team.findById(m.idTeam2).get.name</p></h1>
+    </div>
+</div>
+
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('input').keypress(function(e) {
+             var key_codes = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 0, 8];
+
+             if (!($.inArray(e.which, key_codes) >= 0)) {
+               e.preventDefault();
+             }
+        });
+
+        $("input").blur(function(){
+            if($(this).val() > parseInt($(this).attr('max'))){
+                $(this).select();
+            }
+            else {
+                $(this).val(parseInt($(this).val()));
+            }
+        });
+    });
+</script>
+}

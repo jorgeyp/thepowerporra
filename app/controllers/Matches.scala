@@ -22,5 +22,12 @@ object Matches extends Controller with Secured {
       Ok(html.matches(Match.findAll))
   }
 
+  /**
+   * Display the dashboard.
+   */
+  def set = IsAdmin { email => implicit request =>
+      Ok(html.administration.matchesControl(Match.findAll))
+  }
+
 
 }
