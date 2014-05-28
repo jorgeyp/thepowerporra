@@ -109,7 +109,7 @@ object User {
 
       SQL(
         """
-          delete from jugador_apuesta where idUsuario={idUsuario} and idEquipo1={idEquipo1} and idEquipo2={idEquipo2}
+          delete from partido_apuesta where idUsuario={idUsuario} and idEquipo1={idEquipo1} and idEquipo2={idEquipo2}
         """
       ).on(
           'idUsuario -> userId(userEmail),
@@ -166,5 +166,7 @@ object User {
         ).executeUpdate()
     }
   }
+
+
 
 }

@@ -88,8 +88,8 @@
 function bet(idTeam1, idTeam2) {
     event.preventDefault();
 
-    var g1 = $("#g1" + idTeam1).attr("value");
-    var g2 = $("#g2" + idTeam2).attr("value");
+    var g1 = $("#g1" + idTeam1).val();
+    var g2 = $("#g2" + idTeam2).val();
     $.ajax(jsRoutes.controllers.Matches.bet(idTeam1, idTeam2, g1, g2))
     .done(function() {
         bootstrap_alert.success("Apuesta registrada", idTeam1, idTeam2);
