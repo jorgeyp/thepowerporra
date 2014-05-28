@@ -30,6 +30,7 @@ GET     /matches/set                        controllers.Matches.set
 # Classification
 GET     /classification                     controllers.Classification.index
 POST    /classification/:idRound/:idTeam    controllers.Classification.bet(idRound: Int, idTeam: Int)
+GET     /classification/set                 controllers.Classification.set
 
 # Javascript routing
 GET     /javascriptRoutes                   controllers.Application.javascriptRoutes
