@@ -18,8 +18,11 @@ object Matches extends Controller with Secured {
    * Display the dashboard.
    */
   def index = IsAuthenticated {
-    _ => _ =>
-      Ok(html.matches(Match.findAll))
+    email => implicit request =>
+      User.findByEmail(email).map { user =>
+        Ok(html.matches(Match.findAll, user))
+      }.getOrElse(Forbidden)
+
   }
 
   def bet(idTeam1: Int, idTeam2: Int, g1: Int, g2: Int) = IsAuthenticated {email => implicit request =>

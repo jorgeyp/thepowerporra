@@ -188,4 +188,59 @@ object User {
     }
   }
 
+  def getMatchBet(userEmail: String, idTeam1: Int, idTeam2: Int): Option[MatchBet] = {
+    DB.withConnection { implicit connection =>
+
+      val user = userId(userEmail)
+
+      SQL(
+        """select * from partido_apuesta where idUsuario={user} and idEquipo1={idTeam1} and idEquipo2={idTeam2}"""
+      ).on(
+          'user -> user,
+          'idTeam1 -> idTeam1,
+          'idTeam2 -> idTeam2
+        ).as(MatchBet.simple.singleOpt)
+    }
+  }
+
+  def getMatchBetTeam1(userEmail: String, idTeam1: Int, idTeam2: Int): Int = {
+    DB.withConnection { implicit connection =>
+
+      val user = userId(userEmail)
+
+      val bet = SQL(
+        """select * from partido_apuesta where idUsuario={user} and idEquipo1={idTeam1} and idEquipo2={idTeam2}"""
+      ).on(
+          'user -> user,
+          'idTeam1 -> idTeam1,
+          'idTeam2 -> idTeam2
+        ).as(MatchBet.simple.singleOpt)
+
+      if (bet.nonEmpty)
+        bet.get.goalsTeam1
+      else
+        -1
+    }
+  }
+
+  def getMatchBetTeam2(userEmail: String, idTeam1: Int, idTeam2: Int): Int = {
+    DB.withConnection { implicit connection =>
+
+      val user = userId(userEmail)
+
+      val bet = SQL(
+        """select * from partido_apuesta where idUsuario={user} and idEquipo1={idTeam1} and idEquipo2={idTeam2}"""
+      ).on(
+          'user -> user,
+          'idTeam1 -> idTeam1,
+          'idTeam2 -> idTeam2
+        ).as(MatchBet.simple.singleOpt)
+
+      if (bet.nonEmpty)
+        bet.get.goalsTeam2
+      else
+        -1
+    }
+  }
+
 }
