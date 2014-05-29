@@ -29,7 +29,7 @@
                     @inputPassword(
                     signupForm("password.main"),
                     '_label -> "Contraseña",
-                    '_help -> "La contraseña debe tener al menos 6 caracteres. "
+                    '_help -> "La contraseña debe tener al menos 6 caracteres. Se guardará de forma cifrada."
                     )
 
                     @inputPassword(
@@ -49,7 +49,6 @@
                         )
 
                     </fieldset>
-
                     <div class="actions">
                         <input type="submit" class="btn primary" value="Registrarse">
                         <a href="@routes.Porra.index" class="btn">Cancelar</a>

@@ -6,6 +6,8 @@ import play.api.Play.current
 import anorm._
 import anorm.SqlParser._
 
+import org.mindrot.jbcrypt.BCrypt
+
 /**
  * Created by 71772901 on 07/05/2014.
  */
@@ -50,17 +52,29 @@ object User {
   /**
    * Authenticate a User.
    */
-  def authenticate(email: String, sha1Hash: String): Option[User] = {
+  def authenticate(email: String, passwd: String): Option[User] = {
+
     DB.withConnection { implicit connection =>
-      SQL(
-        """
-         select * from usuario where
-         email = {email} and sha1Hash = {sha1Hash}
-        """
+
+      val sha1Hash = SQL(
+        """select sha1Hash from usuario where email={email}"""
       ).on(
-          'email -> email,
-          'sha1Hash -> sha1Hash
-        ).as(User.simple.singleOpt)
+        'email -> email
+        ).as(str("sha1Hash").singleOpt)
+
+      if (BCrypt.checkpw(passwd, sha1Hash.get)) {
+        SQL(
+          """
+           select * from usuario where
+           email = {email} and sha1Hash = {sha1Hash}
+          """
+        ).on(
+            'email -> email,
+            'sha1Hash -> sha1Hash
+          ).as(User.simple.singleOpt)
+      } else {
+        Option.empty
+      }
     }
   }
 
@@ -89,6 +103,9 @@ object User {
    * Create a User.
    */
   def create(user: User): User = {
+
+    val passwd = BCrypt.hashpw(user.sha1Hash, BCrypt.gensalt(12))
+
     DB.withConnection { implicit connection =>
       SQL(
         """
@@ -99,7 +116,7 @@ object User {
       ).on(
           'descUsuario -> user.username,
           'email -> user.email,
-          'sha1Hash -> user.sha1Hash
+          'sha1Hash -> passwd
         ).executeUpdate()
 
       user
