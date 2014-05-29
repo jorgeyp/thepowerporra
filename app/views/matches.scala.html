@@ -32,28 +32,37 @@
 
 @matches.map {m =>
 
-<div class="col-md-3 col-md-offset-2">
-    <div class="well">
-        <img src='@routes.Assets.at("images/paises/" + m.idTeam1 + ".png")' class="img-responsive img-rounded center-block">
-        <h2 class="text-center"><p>@Team.findById(m.idTeam1).get.name</p></h2>
+<div class="container-fluid">
+    <div class="col-xs-3 col-md-offset-2">
+        <div class="well">
+            <img src='@routes.Assets.at("images/paises/" + m.idTeam1 + ".png")' class="img-responsive img-rounded center-block">
+            <h3 class="text-center"><p>@Team.findById(m.idTeam1).get.name</p></h3>
+        </div>
+    </div>
+    <div class="col-xs-2 well">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-6"><p><input type="number" value=@User.getMatchBetTeam1(user.email, m.idTeam1, m.idTeam2) min=0 step=1 max=20 data-bind="value:replyNumber" id="g1@m.idTeam1" maxlength="2" size="2"></p></div>
+                <div class="col-xs-6"><p><input type="number" value=@User.getMatchBetTeam2(user.email, m.idTeam1, m.idTeam2) min=0 step=1 max=20 data-bind="value:replyNumber" id="g2@m.idTeam2" maxlength="2" size="2"></p></div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div id="success@m.idTeam1@m.idTeam2"></div>
+            <div id="error@m.idTeam1@m.idTeam2"></div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <button id="1" onclick="event.preventDefault(); bet(@m.idTeam1, @m.idTeam2);" type="button" class="btn btn-primary bet btn-block" data-toggle="tooltip" data-placement="right" title="">Registrar apuesta</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-3">
+        <div class="well">
+            <img src='@routes.Assets.at("images/paises/" + m.idTeam2 + ".png")' class="img-responsive img-rounded center-block">
+            <h3 class="text-center"><p>@Team.findById(m.idTeam2).get.name</p></h3>
+        </div>
     </div>
 </div>
-<div class="col-md-2 well">
-    <div class="row">
-        <div class="col-md-6"><p><input type="number" value=@User.getMatchBetTeam1(user.email, m.idTeam1, m.idTeam2) min=0 step=1 max=20 data-bind="value:replyNumber" id="g1@m.idTeam1" maxlength="2" size="2"></p></div>
-        <div class="col-md-6"><p><input type="number" value=@User.getMatchBetTeam2(user.email, m.idTeam1, m.idTeam2) min=0 step=1 max=20 data-bind="value:replyNumber" id="g2@m.idTeam2" maxlength="2" size="2"></p></div>
-        <div id="success@m.idTeam1@m.idTeam2"></div>
-        <div id="error@m.idTeam1@m.idTeam2"></div>
-    </div>
-    <div class="container"><button id="1" onclick="event.preventDefault(); bet(@m.idTeam1, @m.idTeam2);" type="button" class="btn btn-primary bet" data-toggle="tooltip" data-placement="right" title="">Registrar apuesta</button></div>
-</div>
-<div class="col-md-3">
-    <div class="well">
-        <img src='@routes.Assets.at("images/paises/" + m.idTeam2 + ".png")' class="img-responsive img-rounded center-block">
-        <h2 class="text-center"><p>@Team.findById(m.idTeam2).get.name</p></h2>
-    </div>
-</div>
-
 }
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
