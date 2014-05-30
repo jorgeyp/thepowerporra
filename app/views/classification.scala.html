@@ -222,11 +222,8 @@
                     alert(errorThrown);
                 });*/
 
-				// Cambio del texto
-				// $(this).parent().parent().children()[1].val('innerHTML', global_reference.parent().children()[1].innerHTML);
-				// alert($(this).parent().parent().children()[1].innerHTML);
-				// $(this).parent().parent().appendChild("jorge");
-			}
+			// Cambio del texto
+			global_reference.parent().children()[1].children[0].innerHTML= $(this).parent().parent().children()[1].children[0].innerHTML;			}
 		})
 
 		$(".bet").click(function( event ) {
