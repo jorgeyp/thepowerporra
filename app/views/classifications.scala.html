@@ -27,8 +27,6 @@
 
 
 <div class="container">
-
-
     <h3>Octavos de final
         <span>
             <button id="1" type="button" class="btn btn-primary bet" data-toggle="tooltip" data-placement="right" title="Registra tu apuesta de clasificados para esta ronda">Registrar apuesta</button>
@@ -165,8 +163,13 @@
 <script>
 	$(document).ready(function() {
 
-	    $.getJSON("/get", function(data){
-            alert("json");
+	    $.getJSON("@routes.Classifications.json", function(data){
+            var items = [];
+            $.each( data, function( key, val ) {
+                var count = 0;
+                $("#r" + val.ronda).children.eq(count).find("img").attr("id", val.team);
+                count++;
+            });
         });
 
 	    // Activar tooltips
