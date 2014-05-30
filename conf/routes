@@ -21,7 +21,7 @@ POST    /signup                             controllers.SignUp.submit
 GET     /players                            controllers.Players.index
 POST    /players/:id                        controllers.Players.bet(id: Int)
 POST    /players/:namePlayer/:idTeam        controllers.Players.submit(namePlayer: String, idTeam: Int)
-GET    /players/set                        controllers.Players.set
+GET     /players/set                        controllers.Players.set
 
 # Matches
 GET     /matches                            controllers.Matches.index
@@ -29,9 +29,10 @@ POST    /matches/:idTeam1/:idTeam2/:g1/:g2  controllers.Matches.bet(idTeam1: Int
 GET     /matches/set                        controllers.Matches.set
 
 # Classification
-GET     /classification                     controllers.Classification.index
-POST    /classification/:idRound/:idTeam    controllers.Classification.bet(idRound: Int, idTeam: Int)
-GET     /classification/set                 controllers.Classification.set
+GET     /classifications                    controllers.Classifications.index
+POST    /classifications/:idRound/:idTeam   controllers.Classifications.bet(idRound: Int, idTeam: Int)
+GET     /classifications/set                controllers.Classifications.set
+GET     /classifications/get                controllers.Classifications.json
 
 # Javascript routing
 GET     /javascriptRoutes                   controllers.Application.javascriptRoutes

@@ -7,6 +7,7 @@ import anorm._
 import anorm.SqlParser._
 
 import org.mindrot.jbcrypt.BCrypt
+import controllers.Classifications
 
 /**
  * Created by 71772901 on 07/05/2014.

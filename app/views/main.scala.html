@@ -31,7 +31,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="@routes.Porra.index">The Power Porra</a>
+            <a class="navbar-brand" href="@routes.Porra.index">The Power Porra <small>v0.1-peta</small></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -39,7 +39,7 @@
             <ul class="nav navbar-nav">
                 <li class="@("active".when(nav == "profile"))"><a href="@routes.Porra.index">Perfil</a></li>
                 <li class="@("active".when(nav == "matches"))"><a href="@routes.Matches.index">Partidos</a></li>
-                <li class="@("active".when(nav == "classification"))"><a href="@routes.Classification.index">Clasificación</a></li>
+                <li class="@("active".when(nav == "classification"))"><a href="@routes.Classifications.index">Clasificación</a></li>
                 <li class="@("active".when(nav == "players"))"><a href="@routes.Players.index">Jugadores</a></li>
             </ul>
 
