@@ -28,7 +28,7 @@ object Classifications extends Controller with Secured {
    */
   def index = IsAuthenticated {
     email => implicit request =>
-      Ok(html.classification(ClassificationBet.findAll(email)))
+      Ok(html.classifications())
   }
 
   def bet(idRound: Int, idTeam: Int) = IsAuthenticated { email => implicit request =>
