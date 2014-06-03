@@ -31,6 +31,7 @@ GET     /matches/set                        controllers.Matches.set
 # Classification
 GET     /classifications                    controllers.Classifications.index
 POST    /classifications/:idRound/:idTeam   controllers.Classifications.bet(idRound: Int, idTeam: Int)
+POST    /classifications/:idRound           controllers.Classifications.delete(idRound: Int)
 GET     /classifications/set                controllers.Classifications.set
 GET     /classifications/get                controllers.Classifications.json
 

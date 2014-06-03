@@ -171,15 +171,15 @@ object User {
     }
   }
 
-  def deleteClassificationBets(userEmail: String) = {
+  def deleteClassificationBets(userEmail: String, idRound: Int) = {
     DB.withConnection { implicit connection =>
         SQL(
           """
-            delete from clasificado_apuesta where idUsuario={userId}
+            delete from clasificado_apuesta where idUsuario={userId} and idRonda={idRound}
         """
-      ).
-          on(
-         'userId -> userId(userEmail)
+      ).on(
+         'userId -> userId(userEmail),
+         'idRound -> idRound
         ).executeUpdate()
     }
   }
