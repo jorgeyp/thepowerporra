@@ -36,6 +36,11 @@ object Classifications extends Controller with Secured {
     Ok
   }
 
+  def delete(idRound: Int) = IsAuthenticated { email => implicit request =>
+    User.deleteClassificationBets(email, idRound)
+    Ok
+  }
+
   def set = IsAdmin { email => implicit request =>
     Ok(html.administration.classificationControl())
   }

@@ -55,7 +55,7 @@
 
     <h3>Cuartos de final
         <span>
-            <button id="2" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Registra tu apuesta de clasificados para esta ronda">Registrar apuesta</button>
+            <button id="2" type="button" class="btn btn-primary bet" data-toggle="tooltip" data-placement="right" title="Registra tu apuesta de clasificados para esta ronda">Registrar apuesta</button>
         </span>
     </h3>
     <div id="success-r2"></div>
@@ -73,7 +73,7 @@
 
     <h3>Semifinales
         <span>
-            <button id="3" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Registra tu apuesta de clasificados para esta ronda">Registrar apuesta</button>
+            <button id="3" type="button" class="btn btn-primary bet" data-toggle="tooltip" data-placement="right" title="Registra tu apuesta de clasificados para esta ronda">Registrar apuesta</button>
         </span>
     </h3></h3>
     <div id="success-r3"></div>
@@ -87,7 +87,7 @@
 
     <h3>Final
         <span>
-            <button id="4" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Registra tu apuesta de clasificados para esta ronda">Registrar apuesta</button>
+            <button id="4" type="button" class="btn btn-primary  bet" data-toggle="tooltip" data-placement="right" title="Registra tu apuesta de clasificados para esta ronda">Registrar apuesta</button>
         </span>
     </h3></h3>
     <div id="success-r4"></div>
@@ -99,7 +99,7 @@
 
     <h3>Campeón
         <span>
-            <button id="5" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Registra tu apuesta de clasificados para esta ronda">Registrar apuesta</button>
+            <button id="5" type="button" class="btn btn-primary bet" data-toggle="tooltip" data-placement="right" title="Registra tu apuesta de clasificados para esta ronda">Registrar apuesta</button>
         </span>
     </h3></h3>
     <div id="success-r5"></div>
@@ -164,16 +164,21 @@
 	$(document).ready(function() {
 
 	    $.getJSON("@routes.Classifications.json", function(data){
-            var items = [];
+            var count = 0;
+            var previous = 1;
             $.each( data, function( key, val ) {
-                var count = 0;
-                $("#r" + val.ronda).children.eq(count).find("img").attr("id", val.team);
+                if (val.round != previous) {
+                    previous = val.round;
+                    count = 0;
+                }
+                $("#r" + val.round).children().eq(count).find("img").attr("id", val.team);
+                $("#r" + val.round).children().eq(count).find("img").attr("src", "@routes.Assets.at("images/paises/")" + val.team + ".png");
                 count++;
             });
         });
 
 	    // Activar tooltips
-	    $("[data-toggle=tooltip").tooltip();
+	    $("[data-toggle=tooltip]").tooltip();
 
 		var global_reference= null;
 
@@ -252,11 +257,22 @@
     function bet(round) {
         event.preventDefault();
 
-        $("#r" + round).find("img").each(function() {
-            var team = $(this).attr("id");
-             $.ajax(jsRoutes.controllers.Classification.bet(round,team))
+        $.ajax(jsRoutes.controllers.Classifications.delete(round))
             .done(function() {
-                bootstrap_alert.success("Apuesta registrada", round);
+                $("#r" + round).find("img").each(function() {
+                    var team = $(this).attr("id");
+                     $.ajax(jsRoutes.controllers.Classifications.bet(round,team))
+                    .done(function() {
+                        bootstrap_alert.success("Apuesta registrada", round);
+                    })
+                    .fail(function(jqXHR, textStatus, errorThrown) {
+                        bootstrap_alert.error("Ocurrió un error al registrar la apuesta, inténtalo de nuevo", round);
+                        console.log(jqXHR);
+                        console.log(textStatus);
+                        console.log(errorThrown);
+                        //alert(errorThrown);
+                    });
+                });
             })
             .fail(function(jqXHR, textStatus, errorThrown) {
                 bootstrap_alert.error("Ocurrió un error al registrar la apuesta, inténtalo de nuevo", round);
@@ -265,7 +281,6 @@
                 console.log(errorThrown);
                 //alert(errorThrown);
             });
-        });
     }
 
 
