@@ -12,22 +12,52 @@
             </center>
         </div>
         <div class="col-xs-8">
-            <p>Puntuación</p>
-            <li>Se indicará el resultado de cada uno de los partidos de la 1ª fase</li>
-            <li>Acertar el signo supone <b>1 punto</b></li>
-            <li>Acertar la diferencia de goles supone <b>2 puntos</b></li>
-            <li>También se puntuará según la cercanía al resultado y la dificultad del mismo</li>
-            <li>Puntos.Dificultad= MAX(3,SQRT(Goles.Equipo1^2+Goles.Equipo2^2))</li>
-            <li>Cercanía= |Goles.Equipo1-Apuesta.Equipo1|+|Goles.Equipo2-Apuesta.Equipo2|
-                <ul>
-                    <li>Cercanía == 0: 100% Puntos.Dificultad</li>
-                    <li>Cercanía == 1: 25% Puntos.Dificultad</li>
-                    <li>Cercanía == 2: 10% Puntos.Dificultad</li>
-                </ul>
-            </li>
-            <p>TODO: Ejemplos</p>
+			<a href="#" data-toggle="modal" data-target="#basicExamples">Ejemplos</a>
         </div>
     </div>
+	
+    <div class="modal fade" id="basicExamples" tabindex="-1" role="dialog" aria-labelledby="basicExamples" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Ejemplos</h4>
+                </div>
+                <div class="modal-body">
+					<h5>Partido Brasil-Croacia termina con un 4-1 y habíamos apostado por un 3-0</h5>
+					<ul>
+						<li>Signo acertado: <b>1 punto</b></li>
+						<li>Diferencia de goles acertada: <b>2 puntos</b></li>
+						<li>Cercanía al resultado= |4-3|+|1-0|= 1+1= 2 &rarr; 10% de los puntos por dificultad</li>
+						<table style="margin-top:0.5em; margin-bottom:0.5em; text-align: center;" align="center" cellpadding="0" cellspacing="0" >
+								<tr>
+									<td nowrap="nowrap" align="right"><i><b>Puntos por dificultad</b></i> = 2 &middot;<span style="font-size: 150%;">&radic;</span></td>
+									<td style="border-top:solid 1px black;" nowrap="nowrap">&nbsp;<i>4</i><sup>2</sup> + <i>1</i><sup>2</sup></td>
+									<td nowrap="nowrap" align="left"> &nbsp; + 1</td>
+									<td nowrap="nowrap" align="left"> &nbsp; = 9,2</td>
+								</tr>
+						</table>
+						<li>Puntuación= 1 + 2 + 10%&middot;9,2= <b>3,92</b> </li>
+					</ul>
+					<br>
+					<h5>Partido México-Camerún termina con un 1-1 y habíamos apostado por un 1-2</h5>
+					<ul>
+						<li>Signo acertado: <b>0 puntos</b></li>
+						<li>Diferencia de goles acertada: <b>0 puntos</b></li>
+						<li>Cercanía al resultado= |1-1|+|1-2|= 0+1= 1 &rarr; 25% de los puntos por dificultad</li>
+						<table style="margin-top:0.5em; margin-bottom:0.5em; text-align: center;" align="center" cellpadding="0" cellspacing="0" >
+								<tr>
+									<td nowrap="nowrap" align="right"><i><b>Puntos por dificultad</b></i> = 2 &middot;<span style="font-size: 150%;">&radic;</span></td>
+									<td style="border-top:solid 1px black;" nowrap="nowrap">&nbsp;<i>1</i><sup>2</sup> + <i>1</i><sup>2</sup></td>
+									<td nowrap="nowrap" align="left"> &nbsp; + 1</td>
+									<td nowrap="nowrap" align="left"> &nbsp; = 3</td>
+								</tr>
+						</table>
+						<li>Puntuación= 0 + 0 + 25%&middot;3= <b>0,75</b> </li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 @matches.map {m =>
