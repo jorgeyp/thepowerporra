@@ -63,7 +63,7 @@ CREATE TABLE `clasificado_apuesta` (
 
 LOCK TABLES `clasificado_apuesta` WRITE;
 /*!40000 ALTER TABLE `clasificado_apuesta` DISABLE KEYS */;
-INSERT INTO `clasificado_apuesta` VALUES (1,1,15),(1,1,16);
+INSERT INTO `clasificado_apuesta` VALUES (1,1,9),(1,1,13),(1,1,14),(1,1,15),(1,1,19),(1,1,25),(1,2,21),(1,2,22),(1,2,23),(1,3,17),(1,3,18),(1,3,20),(1,3,24),(1,4,15),(1,4,32),(1,5,31);
 /*!40000 ALTER TABLE `clasificado_apuesta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -103,9 +103,10 @@ CREATE TABLE `jugador` (
   `descJugador` varchar(100) NOT NULL,
   `idEquipo` int(11) NOT NULL,
   `golesJugador` int(11) DEFAULT '0',
+  `confirmado` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idJugador`),
   KEY `INDEX_JUGADOR_EQUIPO` (`idEquipo`) COMMENT 'Index para foreign a tabla Equipo'
-) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,7 +115,7 @@ CREATE TABLE `jugador` (
 
 LOCK TABLES `jugador` WRITE;
 /*!40000 ALTER TABLE `jugador` DISABLE KEYS */;
-INSERT INTO `jugador` VALUES (1,'Klose',1,0),(2,'Müller',1,0),(3,'Özil',1,0),(4,'Slimani',2,0),(5,'Agüero',3,0),(6,'Higuaín',3,0),(7,'Messi',3,0),(8,'Joshua Kennedy',4,0),(9,'De Bruyne',5,0),(10,'Hazard',5,0),(11,'Dzeko',6,0),(12,'Fred',7,0),(13,'Hulk',7,0),(14,'Neymar',7,0),(15,'Eto\'o',8,0),(16,'Alexis Sánchez',9,0),(17,'Falcao',10,0),(18,'Gutiérrez',10,0),(19,'Park Chu Young',11,0),(20,'Drogba',12,0),(21,'Álvaro Saborío',13,0),(22,'Mandzukic',14,0),(23,'Caicedo',15,0),(24,'David Villa',16,0),(25,'Diego Costa',16,0),(26,'Torres',16,0),(27,'Altidore',17,0),(28,'Dempsey',17,0),(29,'Benzema',18,0),(30,'Ribery',18,0),(31,'Mitroglou',20,0),(32,'Robben',28,0),(33,'Van Persie',28,0),(34,'Rooney',22,0),(35,'Nekounam',23,0),(36,'Balotelli',24,0),(37,'Okazaki',25,0),(38,'Peralta',26,0),(39,'Emenike',27,0),(40,'Cristiano Ronaldo',29,0),(41,'Cavani',32,0),(42,'Luis Suárez',32,0),(43,'asdfasdf',1,0),(44,'asdfasdf',1,0),(45,'asdfasdf',1,0),(46,'ddasf',1,0),(47,'asdfasdf',1,0),(48,'asdfdfassdfa',1,0),(49,'yagüe',6,0),(50,'qrwerqwer',3,0);
+INSERT INTO `jugador` VALUES (1,'Klose',1,0,1),(2,'Müller',1,0,1),(3,'Özil',1,0,1),(4,'Slimani',2,0,1),(5,'Agüero',3,0,1),(6,'Higuaín',3,0,1),(7,'Messi',3,0,1),(8,'Joshua Kennedy',4,0,1),(9,'De Bruyne',5,0,1),(10,'Hazard',5,0,1),(11,'Dzeko',6,0,1),(12,'Fred',7,0,1),(13,'Hulk',7,0,1),(14,'Neymar',7,0,1),(15,'Eto\'o',8,0,1),(16,'Alexis Sánchez',9,0,1),(17,'Falcao',10,0,1),(18,'Gutiérrez',10,0,1),(19,'Park Chu Young',11,0,1),(20,'Drogba',12,0,1),(21,'Álvaro Saborío',13,0,1),(22,'Mandzukic',14,0,1),(23,'Caicedo',15,0,1),(24,'David Villa',16,0,1),(25,'Diego Costa',16,0,1),(26,'Torres',16,0,1),(27,'Altidore',17,0,1),(28,'Dempsey',17,0,1),(29,'Benzema',18,0,1),(30,'Ribery',18,0,1),(31,'Mitroglou',20,0,1),(32,'Robben',28,0,1),(33,'Van Persie',28,0,1),(34,'Rooney',22,0,1),(35,'Nekounam',23,0,1),(36,'Balotelli',24,0,1),(37,'Okazaki',25,0,1),(38,'Peralta',26,0,1),(39,'Emenike',27,0,1),(40,'Cristiano Ronaldo',29,0,1),(41,'Cavani',32,0,1),(42,'Luis Suárez',32,0,1),(51,'eufrasio',8,0,0);
 /*!40000 ALTER TABLE `jugador` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,7 +140,7 @@ CREATE TABLE `jugador_apuesta` (
 
 LOCK TABLES `jugador_apuesta` WRITE;
 /*!40000 ALTER TABLE `jugador_apuesta` DISABLE KEYS */;
-INSERT INTO `jugador_apuesta` VALUES (1,50);
+INSERT INTO `jugador_apuesta` VALUES (1,51);
 /*!40000 ALTER TABLE `jugador_apuesta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -336,4 +337,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-05-30 14:01:24
+-- Dump completed on 2014-06-04 11:52:12
