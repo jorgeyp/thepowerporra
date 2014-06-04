@@ -148,7 +148,7 @@ function submit(player, team) {
 
 function bet() {
     event.preventDefault();
-    var id = $("img").attr("name");
+    var id = $("#player").attr("name");
     if (id === "unknown") {
         $('#newPlayerModal').modal('show');
         $('#newPlayerModal').on('shown.bs.modal', function (e) {})
