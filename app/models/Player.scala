@@ -10,7 +10,7 @@ import play.api.Play.current
 /**
  * Created by 71772901 on 12/05/2014.
  */
-case class Player(id: Int, description: String, idTeam: Int, goals: Int)
+case class Player(id: Int, description: String, idTeam: Int, goals: Int, confirmed: Boolean)
 
 object Player {
   // -- Parsers
@@ -22,8 +22,9 @@ object Player {
     get[Int]("jugador.idJugador") ~
       get[String]("jugador.descJugador") ~
       get[Int]("jugador.idEquipo") ~
-      get[Int]("jugador.golesJugador") map {
-      case id~description~idTeam~goals=> Player(id, description, idTeam, goals)
+      get[Int]("jugador.golesJugador") ~
+      get[Boolean]("jugador.confirmado") map {
+      case id~description~idTeam~goals~confirmed=> Player(id, description, idTeam, goals, confirmed)
     }
   }
 
