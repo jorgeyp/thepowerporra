@@ -42,7 +42,7 @@ object Classifications extends Controller with Secured {
     Ok
   }
 
-  def set = IsAdmin { email => implicit request =>
+  def admin = IsAdmin { email => implicit request =>
     Ok(html.administration.classificationControl())
   }
 

@@ -32,9 +32,12 @@ object Matches extends Controller with Secured {
   /**
    * Display the dashboard.
    */
-  def set = IsAdmin { email => implicit request =>
+  def admin = IsAdmin { email => implicit request =>
       Ok(html.administration.matchesControl(Match.findAll))
   }
 
-
+  def set(idTeam1: Int, idTeam2: Int, g1: Int, g2: Int) = IsAdmin { email => implicit request =>
+    Match.set(idTeam1: Int, idTeam2: Int, g1: Int, g2: Int)
+    Ok
+  }
 }

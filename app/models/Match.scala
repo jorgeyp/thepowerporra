@@ -38,4 +38,22 @@ object Match {
     }
   }
 
+  /**
+   * Update a Match.
+   */
+  def set(idTeam1: Int, idTeam2: Int, g1: Int, g2: Int) = {
+    DB.withConnection { implicit connection =>
+      SQL(
+        """
+          update partido set golesEquipo1={g1}, golesEquipo2={g2} where idEquipo1={idTeam1} and idEquipo2={idTeam2}
+        """
+      ).on(
+          'g1 -> g1,
+          'g2 -> g2,
+          'idTeam1 -> idTeam1,
+          'idTeam2 -> idTeam2
+        ).executeUpdate()
+    }
+  }
+
 }

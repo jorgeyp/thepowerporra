@@ -57,7 +57,8 @@ object Application extends Controller {
     import routes.javascript._
     Ok(
       Routes.javascriptRouter("jsRoutes")(
-        Players.bet, Classifications.bet, Players.submit, Matches.bet, Classifications.delete
+        Players.bet, Classifications.bet, Players.submit, Matches.bet, Classifications.delete,
+        Matches.set
       )
     ).as("text/javascript")
   }

@@ -4,7 +4,7 @@
 @main("Partidos", nav = "matches") {
 
 <div class="container">
-    <div class="col-xs-12"><center><h1>Panel de control de clasificación</h1></center></div>
+    <div class="col-xs-12"><center><h1>Panel de control de partidos</h1></center></div>
 </div>
 
 @matches.map {m =>
@@ -12,7 +12,7 @@
 <div class="col-md-3 col-md-offset-2">
     <div class="well">
         <img src='@routes.Assets.at("images/paises/" + m.idTeam1 + ".png")' class="img-responsive img-rounded center-block">
-        <h2 class="text-center"><p>@Team.findById(m.idTeam1).get.name</p></h2>
+        <h3 class="text-center"><p>@Team.findById(m.idTeam1).get.name</p></h3>
     </div>
 </div>
 <div class="col-md-2 well">
@@ -67,7 +67,7 @@ function bet(idTeam1, idTeam2) {
 
     var g1 = $("#g1" + idTeam1).val();
     var g2 = $("#g2" + idTeam2).val();
-    $.ajax(jsRoutes.controllers.Matches.bet(idTeam1, idTeam2, g1, g2))
+    $.ajax(jsRoutes.controllers.Matches.set(idTeam1, idTeam2, g1, g2))
     .done(function() {
         bootstrap_alert.success("Apuesta registrada", idTeam1, idTeam2);
     })
