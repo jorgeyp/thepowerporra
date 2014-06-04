@@ -12,6 +12,30 @@
             </center>
         </div>
         <div class="col-xs-8">
+        <p>Puntuación</p>
+            <li>Se indicará el resultado de cada uno de los partidos de la 1ª fase</li>
+            <li>Acertar el signo supone <b>1 punto</b></li>
+            <li>Acertar la diferencia de goles supone <b>2 puntos</b></li>
+            <li>También se puntuará según la cercanía al resultado y la dificultad del mismo</li>
+			<table style="margin-top:0.5em; margin-bottom:0.5em; text-align: center;" align="center" cellpadding="0" cellspacing="0" >
+					<tr>
+						<td nowrap="nowrap" align="right"><i><b>Puntos por dificultad</b></i> = 2 &middot;<span style="font-size: 150%;">&radic;</span></td>
+						<td style="border-top:solid 1px black;" nowrap="nowrap">&nbsp;<i>Goles<sub>local</sub></i><sup>2</sup> + <i>Goles<sub>visit</sub></i><sup>2</sup></td>
+						<td nowrap="nowrap" align="left"> &nbsp; + 1</td>
+					</tr>
+			</table>
+			<table style="margin-top:0.5em; margin-bottom:0.5em; text-align: center;" align="center" cellpadding="0" cellspacing="0" >
+					<tr>
+						<td nowrap="nowrap" align="right"><i><b>Cercanía</b></i> = |<i>Goles<sub>local</sub></i>-<i>Apuesta<sub>local</sub></i>| + |<i>Goles<sub>visit</sub></i>-<i>Apuesta<sub>visit</sub></i>|</td>
+					</tr>
+			</table>
+            <li>Según la cercanía de la apuesta al resultado final, se anotarán:
+                <ul>
+                    <li>Si Cercanía = 0: 100% de los puntos por dificultad</li>
+                    <li>Si Cercanía = 1:  25% de los puntos por dificultad</li>
+                    <li>Si Cercanía = 2:  10% de los puntos por dificultad</li>
+                </ul>
+            </li>
 			<a href="#" data-toggle="modal" data-target="#basicExamples">Ejemplos</a>
         </div>
     </div>
