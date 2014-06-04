@@ -173,6 +173,7 @@
                 }
                 $("#r" + val.round).children().eq(count).find("img").attr("id", val.team);
                 $("#r" + val.round).children().eq(count).find("img").attr("src", "@routes.Assets.at("images/paises/")" + val.team + ".png");
+                $("#r" + val.round).children().eq(count).find("h5").val(val.nameTeam);
                 count++;
             });
         });
