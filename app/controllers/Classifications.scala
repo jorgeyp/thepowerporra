@@ -20,7 +20,8 @@ object Classifications extends Controller with Secured {
   implicit val classificationBetWrites: Writes[ClassificationBet] = (
     (JsPath \ "user").write[Int] and
     (JsPath \ "round").write[Int] and
-      (JsPath \ "team").write[Int]
+    (JsPath \ "team").write[Int] and
+      (JsPath \ "teamName").write[String]
     )(unlift(ClassificationBet.unapply))
 
   /**
