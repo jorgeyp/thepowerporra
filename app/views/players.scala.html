@@ -23,7 +23,7 @@
                 }
                 case None => {
                     <img name="" src="@routes.Assets.at("images/players/jugador_no_listado.jpg")" id="player" class="img-rounded img-responsive">
-                    <h5><p align="center" id="playerLabel">&#63;/p></h5>
+                    <h5><p align="center" id="playerLabel"></p></h5>
                 }
             }
 
@@ -49,7 +49,7 @@
                 <div class="col-xs-3"><a href="#" class="thumbnail"><img src='@routes.Assets.at("images/players/" + player.id + ".jpg")' name="@player.id"></a><h5><p align="center">@player.description</p></h5></div>
             }
         }
-        <div class="col-xs-3"><a href="#" class="thumbnail"><img src='@routes.Assets.at("images/players/jugador_no_listado.jpg")' name="unknown" class="img-responsive"><h5><p align="center">Jugador no listado</p></h5></a></div>
+        <div class="col-xs-3"><a href="#" class="thumbnail"><img src='@routes.Assets.at("images/players/jugador_no_listado.jpg")' name="unknown" class="img-responsive"></a><h5><p align="center">Jugador no listado</p></h5></div>
     </div>
 </div> <!-- /container -->
 
