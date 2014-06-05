@@ -1,4 +1,4 @@
-@(players: Seq[Player], player: Player)
+@(players: Seq[Player], player: Option[Player])
 
 @main("Jugadores", nav = "players") {
 <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -10,14 +10,24 @@
         <div id="error"></div>
 	<div class="col-xs-6">
 	    <center>
+            
 
-            @if(player.confirmed) {
-                <img name="" src="@routes.Assets.at("images/players/" + player.id + ".jpg")" id="player" class="img-rounded img-responsive">
-            } else {
-                <img name="" src="@routes.Assets.at("images/players/jugador_no_listado.jpg")" id="player" class="img-rounded img-responsive">
+            @player match {
+                case Some(p) => {
+                    if(player.get.confirmed) {
+                        <img name="" src="@routes.Assets.at("images/players/" + player.get.id + ".jpg")" id="player" class="img-rounded img-responsive">
+                    } else {
+                        <img name="" src="@routes.Assets.at("images/players/jugador_no_listado.jpg")" id="player" class="img-rounded img-responsive">
+                    }
+                    <h5><p align="center" id="playerLabel">@player.get.description</p></h5>
+                }
+                case None => {
+                    <img name="" src="@routes.Assets.at("images/players/jugador_no_listado.jpg")" id="player" class="img-rounded img-responsive">
+                    <h5><p align="center" id="playerLabel">&#63/p></h5>
+                }
             }
 
-	        <h5><p align="center" id="playerLabel">@player.description</p></h5>
+	        
 	        <br>
                 <a id="player-submit" onclick="bet()" href="" class="btn btn-primary btn-lg" role="button">Enviar</a>
             </center>
