@@ -1,1 +1,0 @@
-web: target/universal/stage/bin/porra -Dhttp.port=${PORT} -Dhttps.port=9443 -DapplyEvolutions.default=false -Ddb.default.url=mysql://bfd8fca27fc4ce:e93356ef604f8f4@eu-cdbr-west-01.cleardb.com/heroku_618cd6f3f974428?reconnect=true
