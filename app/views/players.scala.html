@@ -14,7 +14,7 @@
             @if(player.confirmed) {
                 <img name="" src="@routes.Assets.at("images/players/" + player.id + ".jpg")" id="player" class="img-rounded img-responsive">
             } else {
-                <img name="" src="@routes.Assets.at("images/players/unknown.jpg")" id="player" class="img-rounded img-responsive">
+                <img name="" src="@routes.Assets.at("images/players/jugador_no_listado.jpg")" id="player" class="img-rounded img-responsive">
             }
 
 	        <h5><p align="center" id="playerLabel">@player.description</p></h5>
@@ -123,6 +123,8 @@ $(document).ready(function() {
 	    var player = $("#newPlayerName").val();
         if(undefined != team && player != "") {
 	        submit(player, team);
+	        $("img#player").attr("src",'@routes.Assets.at("images/players/jugador_no_listado.jpg")');
+	        $("#playerLabel").html(player);
 	        $("#newPlayerModal").modal("hide");
 	    }
 	});
