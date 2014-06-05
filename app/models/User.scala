@@ -270,13 +270,20 @@ object User {
         """select idJugador from jugador_apuesta where idUsuario={user}"""
       ).on(
           'user -> user
-        ).as(scalar[Int].single)
-
-      SQL(
-        """select * from jugador where idJugador={playerId}"""
-      ).on(
-        'playerId -> playerId
-        ).as(Player.simple.singleOpt)
+        ).as(scalar[Int].singleOpt)
+        
+        playerId match {
+            case Some(id) => {
+                SQL(
+                """select * from jugador where idJugador={playerId}"""
+                ).on(
+                    'playerId -> id
+                ).as(Player.simple.singleOpt)
+            }
+            case None => {
+                None
+            }
+        }
     }
   }
 
