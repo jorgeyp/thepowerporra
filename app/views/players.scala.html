@@ -14,7 +14,7 @@
 
             @player match {
                 case Some(p) => {
-                    @if(player.get.confirmed) {
+                    if(player.get.confirmed) {
                         <img name="" src="@routes.Assets.at("images/players/" + player.get.id + ".jpg")" id="player" class="img-rounded img-responsive">
                     } else {
                         <img name="" src="@routes.Assets.at("images/players/jugador_no_listado.jpg")" id="player" class="img-rounded img-responsive">
