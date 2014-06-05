@@ -22,7 +22,6 @@ object Matches extends Controller with Secured {
       User.findByEmail(email).map { user =>
         Ok(html.matches(Match.findAll, user))
       }.getOrElse(Forbidden)
-
   }
 
   def bet(idTeam1: Int, idTeam2: Int, g1: Int, g2: Int) = IsAuthenticated {email => implicit request =>

@@ -261,4 +261,23 @@ object User {
     }
   }
 
+  def getPlayerBet(userEmail: String): Option[Player] = {
+    DB.withConnection { implicit connection =>
+
+      val user = userId(userEmail)
+
+      val playerId = SQL(
+        """select idJugador from jugador_apuesta where idUsuario={user}"""
+      ).on(
+          'user -> user
+        ).as(scalar[Int].single)
+
+      SQL(
+        """select * from jugador where idJugador={playerId}"""
+      ).on(
+        'playerId -> playerId
+        ).as(Player.simple.singleOpt)
+    }
+  }
+
 }
