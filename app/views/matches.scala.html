@@ -95,6 +95,9 @@
     <div class="col-xs-2 well">
         <div class="container-fluid">
             <div class="row">
+                <h4 class="text-center"><p>@m.date</p></h4>
+            </div>
+            <div class="row">
                 <div class="col-xs-6"><p><input type="number" value=@User.getMatchBetTeam1(user.email, m.idTeam1, m.idTeam2) min=0 step=1 max=20 data-bind="value:replyNumber" id="g1@m.idTeam1" maxlength="2" size="2"></p></div>
                 <div class="col-xs-6"><p><input type="number" value=@User.getMatchBetTeam2(user.email, m.idTeam1, m.idTeam2) min=0 step=1 max=20 data-bind="value:replyNumber" id="g2@m.idTeam2" maxlength="2" size="2"></p></div>
             </div>

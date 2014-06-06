@@ -34,7 +34,7 @@ object Match {
    */
   def findAll: Seq[Match] = {
     DB.withConnection { implicit connection =>
-      SQL("select * from partido").as(Match.simple *)
+      SQL("select * from partido order by fechaJornada").as(Match.simple *)
     }
   }
 
