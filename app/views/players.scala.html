@@ -14,15 +14,15 @@
 
             @player match {
                 case Some(p) => {
-                    @if(player.get.confirmed) {
-                        <img name="" src="@routes.Assets.at("images/players/" + player.get.id + ".jpg")" id="player" class="img-rounded img-responsive">
+                    @if(p.confirmed) {
+                        <img name="" src="@routes.Assets.at("images/players/" + p.id + ".jpg")" id="player" class="img-rounded img-responsive">
                     } else {
                         <img name="" src="@routes.Assets.at("images/players/jugador_no_listado.jpg")" id="player" class="img-rounded img-responsive">
                     }
-                    <h5><p align="center" id="playerLabel">@player.get.description</p></h5>
+                    <h5><p align="center" id="playerLabel">@p.description</p></h5>
                 }
                 case None => {
-                    <img name="" src="@routes.Assets.at("images/players/jugador_no_listado.jpg")" id="player" class="img-rounded img-responsive">
+                    <img name="" src='@routes.Assets.at("images/players/unknown.jpg")' id="player" class="img-rounded img-responsive">
                     <h5><p align="center" id="playerLabel"></p></h5>
                 }
             }
