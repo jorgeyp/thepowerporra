@@ -100,6 +100,19 @@ object User {
     }
   }
 
+  def isVerified(email: String): Boolean = {
+    DB.withConnection { implicit connection =>
+
+      val user = userId(email)
+
+      SQL(
+        """select validado from usuario where idUsuario={user}"""
+      ).on(
+          'user -> user
+        ).as(scalar[Boolean].single)
+    }
+  }
+
   /**
    * Create a User.
    */
