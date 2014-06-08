@@ -1,4 +1,4 @@
-@(user: User, users: Seq[User])
+@(user: User, users: Seq[User], reward: Long)
 
 @main("Perfil", nav = "profile") {
 <div class="container">
@@ -25,6 +25,13 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="well">
+                <h2><small>Bote actual: </small>@reward €</h2>
             </div>
         </div>
     </div>
