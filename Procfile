@@ -1,1 +1,1 @@
-web: target/universal/stage/bin/porra -Dhttp.port=${PORT} -Dhttps.port=9443 -DapplyEvolutions.default=false -Ddb.default.url=${CLEARDB_DATABASE_URL}
+web: target/universal/stage/bin/porra -Dapplication.secret=${APP_SECRET} -Dhttp.port=${PORT} -Dhttps.port=9443 -DapplyEvolutions.default=false -Ddb.default.url=${CLEARDB_DATABASE_URL}
