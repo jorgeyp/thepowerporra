@@ -20,7 +20,7 @@ object Porra extends Controller with Secured {
   def index = IsAuthenticated { username => _ =>
     User.findByEmail(username).map { user =>
       Ok(
-        html.perfil(user, User.findAll)
+        html.perfil(user, User.findAll, User.getReward)
       )
     }.getOrElse(Forbidden)
   }

@@ -108,7 +108,7 @@
         </div>
         <div class="container-fluid">
             <div class="row">
-                <button id="1" onclick="event.preventDefault(); bet(@m.idTeam1, @m.idTeam2);" type="button" class="btn btn-primary bet btn-block" data-toggle="tooltip" data-placement="right" title="">Registrar apuesta</button>
+                <button id="1" onclick="bet(@m.idTeam1, @m.idTeam2, event)" type="button" class="btn btn-primary bet btn-block" data-toggle="tooltip" data-placement="right" title="">Registrar apuesta</button>
             </div>
         </div>
     </div>
@@ -150,9 +150,8 @@
         $("#error" + id1 + "" + id2).html('<div id="error" class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+message+'</div>')
     }
 
-function bet(idTeam1, idTeam2) {
+function bet(idTeam1, idTeam2, event) {
     event.preventDefault();
-
     var g1 = $("#g1" + idTeam1).val();
     var g2 = $("#g2" + idTeam2).val();
     $.ajax(jsRoutes.controllers.Matches.bet(idTeam1, idTeam2, g1, g2))

@@ -243,6 +243,7 @@
 		})
 
 		$(".bet").click(function( event ) {
+            event.preventDefault();
             bet(this.id);
         });
 	});
@@ -255,8 +256,7 @@
         $("#error-r" +round).append('<div id="error" class="alert alert-danger alert-dismissable hide"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+message+'</div>')
     }
 
-    function bet(round) {
-        event.preventDefault();
+    function bet(round, event) {
 
         $.ajax(jsRoutes.controllers.Classifications.delete(round))
             .done(function() {

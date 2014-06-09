@@ -100,6 +100,19 @@ object User {
     }
   }
 
+  def isVerified(email: String): Boolean = {
+    DB.withConnection { implicit connection =>
+
+      val user = userId(email)
+
+      SQL(
+        """select validado from usuario where idUsuario={user}"""
+      ).on(
+          'user -> user
+        ).as(scalar[Boolean].single)
+    }
+  }
+
   /**
    * Create a User.
    */
@@ -286,6 +299,14 @@ object User {
                 None
             }
         }
+    }
+  }
+
+  def getReward: Long = {
+    DB.withConnection { implicit connection =>
+      SQL(
+        """select count(idUsuario) from usuario where validado=1"""
+      ).as(scalar[Long].single) * 5
     }
   }
 

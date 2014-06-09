@@ -1,57 +1,69 @@
-@(user: User, users: Seq[User])
+@(user: User, users: Seq[User], reward: Long)
 
 @main("Perfil", nav = "profile") {
+
 <div class="container">
+    @if(!User.isVerified(user.email)) {
     <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="list-group">
-                        <a href="@routes.Matches.index" class="list-group-item">
-                            Partidos
-                        </a>
-                        <a href="@routes.Classifications.index" class="list-group-item">
-                            Clasificación
-                        </a>
-                        <a href="@routes.Players.index" class="list-group-item">
-                            Goles
-                        </a>
-                    </div>
-                    <div class="panel panel-default hidden">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="alert alert-danger">
+                <h2><stron>Aviso: </stron>no se ha verificado su pago</h2>
+            </div>
+        </div>
+    </div>
+    }
+    <div class="row clearfix">
+        <div class="col-md-8 col-md-offset-2">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
                         <div class="panel-body">
-                            <button type="button" class="btn btn-primary btn-lg btn-block">
-                                Pagar con PayPal
-                            </button>
+                            <div class="list-group">
+                                <a href="@routes.Matches.index" class="list-group-item">
+                                    Partidos
+                                </a>
+                                <a href="@routes.Classifications.index" class="list-group-item">
+                                    Clasificación
+                                </a>
+                                <a href="@routes.Players.index" class="list-group-item">
+                                    Goles
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="well">
+                        <h2><small>Bote actual: </small>@reward €</h2>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3>Usuarios</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                @users.map { u =>
+                                <li class="list-group-item">
+                                    @u.username
+                                    @if(User.isVerified(u.email)) {
+                                    <span class="label label-primary">Pagado</span>
+                                    } else {
+                                    <span class="label label-danger">Pago pendiente</span>
+                                    }
+                                </li>
+                                }
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3>Usuarios</h3>
-                </div>
-                <div class="panel-body">
-                    <ul class="list-group">
-                        @users.map { u =>
-                        <li class="list-group-item">
-                            <span class="badge"></span>
-                            @u.username
-                        </li>
-                        }
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+
 </div>
-
-
-
-
 
 }
 
