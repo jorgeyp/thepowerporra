@@ -143,9 +143,11 @@ object User {
 
       SQL(
         """
-          delete from jugador_apuesta
+          delete from jugador_apuesta where idUsuario={user}
         """
-      ).executeUpdate()
+      ).on(
+        'user -> userId(userEmail)
+        ).executeUpdate()
 
       SQL(
         """insert into jugador_apuesta values({idUsuario}, {idJugador})"""
