@@ -34,14 +34,14 @@ object Classifications extends Controller with Secured {
 
   def bet(idRound: Int, idTeam: Int) = IsAuthenticated { email => implicit request =>
     User.createClassificationBet(idRound, idTeam, email)
-    Ok
-    // Forbidden
+    // Ok
+    Forbidden
   }
 
   def delete(idRound: Int) = IsAuthenticated { email => implicit request =>
     User.deleteClassificationBets(email, idRound)
-    Ok
-    // Forbidden
+    // Ok
+    Forbidden
   }
 
   def admin = IsAdmin { email => implicit request =>
