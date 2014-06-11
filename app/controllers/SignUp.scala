@@ -63,7 +63,8 @@ object SignUp extends Controller {
    * Display an empty form.
    */
   def form = Action {
-    Ok(html.signup.form(signupForm));
+    //Ok(html.signup.form(signupForm));
+    Ok("Periodo de registro finalizado");
   }
 
   /**
