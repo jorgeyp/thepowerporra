@@ -98,8 +98,8 @@
                 <h4 class="text-center"><p>@m.date</p></h4>
             </div>
             <div class="row">
-                <div class="col-xs-6"><p><input type="number" value=@User.getMatchBetTeam1(user.email, m.idTeam1, m.idTeam2) min=0 step=1 max=20 data-bind="value:replyNumber" id="g1@m.idTeam1" maxlength="2" size="2"></p></div>
-                <div class="col-xs-6"><p><input type="number" value=@User.getMatchBetTeam2(user.email, m.idTeam1, m.idTeam2) min=0 step=1 max=20 data-bind="value:replyNumber" id="g2@m.idTeam2" maxlength="2" size="2"></p></div>
+                <div class="col-xs-6"><p><input type="number" value=@User.getMatchBetTeam1(user.email, m.idTeam1, m.idTeam2) min=0 step=1 max=20 data-bind="value:replyNumber" id='g1@(m.idTeam1)Y@(m.idTeam2)' maxlength="2" size="2"></p></div>
+                <div class="col-xs-6"><p><input type="number" value=@User.getMatchBetTeam2(user.email, m.idTeam1, m.idTeam2) min=0 step=1 max=20 data-bind="value:replyNumber" id='g2@(m.idTeam1)Y@(m.idTeam2)' maxlength="2" size="2"></p></div>
             </div>
         </div>
         <div class="container-fluid">
@@ -152,8 +152,8 @@
 
 function bet(idTeam1, idTeam2, event) {
     event.preventDefault();
-    var g1 = $("#g1" + idTeam1).val();
-    var g2 = $("#g2" + idTeam2).val();
+    var g1 = $("#g1" + idTeam1 + "Y" + idTeam2).val();
+    var g2 = $("#g2" + idTeam1 + "Y" + idTeam2).val();
     $.ajax(jsRoutes.controllers.Matches.bet(idTeam1, idTeam2, g1, g2))
     .done(function() {
         bootstrap_alert.success("Apuesta registrada", idTeam1, idTeam2);
