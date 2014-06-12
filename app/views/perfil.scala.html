@@ -1,4 +1,4 @@
-@(user: User, users: Seq[User], reward: Long)
+@(user: User, users: Seq[Rank], reward: Long)
 
 @main("Perfil", nav = "profile") {
 
@@ -47,11 +47,7 @@
                                 @users.map { u =>
                                 <li class="list-group-item">
                                     @u.username
-                                    @if(User.isVerified(u.email)) {
-                                    <span class="label label-primary">Pagado</span>
-                                    } else {
-                                    <span class="label label-danger">Pago pendiente</span>
-                                    }
+                                    <span class="badge">@u.totalPoints</span>
                                 </li>
                                 }
                             </ul>
