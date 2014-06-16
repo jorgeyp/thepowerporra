@@ -10,7 +10,7 @@ import play.api.Play.current
 /**
  * Created by 71772901 on 12/05/2014.
  */
-case class Player(id: Int, description: String, idTeam: Int, goals: Int, confirmed: Boolean)
+case class Player(id: Int, description: String, idTeam: Int, confirmed: Boolean)
 
 object Player {
   // -- Parsers
@@ -22,9 +22,8 @@ object Player {
     get[Int]("jugador.idJugador") ~
       get[String]("jugador.descJugador") ~
       get[Int]("jugador.idEquipo") ~
-      get[Int]("jugador.golesJugador") ~
       get[Boolean]("jugador.confirmado") map {
-      case id~description~idTeam~goals~confirmed=> Player(id, description, idTeam, goals, confirmed)
+      case id~description~idTeam~confirmed=> Player(id, description, idTeam, confirmed)
     }
   }
 
@@ -49,18 +48,17 @@ object Player {
   /**
    * Create a Player.
    */
-  def create(name: String, team: Int, goals: Int) = {
+  def create(name: String, team: Int) = {
     DB.withConnection { implicit connection =>
       SQL(
         """
-          insert into jugador (descJugador, idEquipo, golesJugador) values (
-            {name}, {team}, {goals}
+          insert into jugador (descJugador, idEquipo) values (
+            {name}, {team}
           )
         """
       ).on(
           'name -> name,
-          'team -> team,
-          'goals -> goals
+          'team -> team
         ).executeUpdate()
     }
   }
