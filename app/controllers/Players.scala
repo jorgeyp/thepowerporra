@@ -56,7 +56,7 @@ object Players extends Controller with Secured {
   }
 
   def submit(name: String, team: Int) = IsAuthenticated {email => implicit request =>
-    // Player.create(name, team, 0)
+    // Player.create(name, team)
     // User.createPlayerBet(Player.playerId(name), email)
     // Ok
     Forbidden
